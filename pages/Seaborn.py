@@ -1,7 +1,7 @@
 import streamlit as st
 import seaborn as sns
 import matplotlib.pyplot as plt
-import pandas as
+import pandas as pd
 import time
 if st.button("Back to Home"):
     st.switch_page("main.py")
@@ -100,180 +100,220 @@ st.markdown("""
 
 #sidebar.........
 
-
-
+import streamlit as st
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Seaborn Full Course", layout="wide")
 
+# Load datasets
 tips = sns.load_dataset("tips")
 iris = sns.load_dataset("iris")
+titanic = sns.load_dataset("titanic")
 
-st.markdown("<h1 style='text-align:center;color:cyan;'>📊 Seaborn Full Course Dashboard</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align:center;color:cyan;'> Seaborn Full Course</h1>", unsafe_allow_html=True)
 
-# ---------- SIDEBAR (ANCHOR MENU ONLY) ----------
+# ---------------- SIDEBAR ----------------
 st.sidebar.markdown("""
 ## 📋 Topics Menu
 - [Introduction](#intro)
-- [Table of Contents](#tab)
-- [Categorical Plots](#cat)
-- [Univariate Plots](#uni)
-- [Bivariate Plots](#bi)
-- [Multivariate Plots](#multi)
-- [Matrix Plots](#matrix)
-- [Dashboard](#dashboard)
+- [Table of Contents](#toc)
+
+### Categorical
+- [Count Plot](#countplot)
+- [Bar Plot](#barplot)
+- [Box Plot](#boxplot)
+- [Violin Plot](#violinplot)
+- [Strip Plot](#stripplot)
+- [Swarm Plot](#swarmplot)
+
+### Univariate
+- [Histogram](#histogram)
+- [KDE Plot](#kdeplot)
+- [Rug Plot](#rugplot)
+- [Dist Plot](#distplot)
+
+### Bivariate
+- [Scatter Plot](#scatter)
+- [Regression Plot](#regression)
+- [Line Plot](#lineplot)
+- [Joint Plot](#jointplot)
+- [Hexbin Plot](#hexbin)
+
+### Multivariate
+- [Point Plot](#pointplot)
+- [Pair Plot](#pairplot)
+
+### Advanced
+- [Heatmap](#heatmap)
+- [Clustermap](#clustermap)
+- [Styling & Themes](#style)
+- [Faceting](#facet)
+- [Datasets](#datasets)
 - [Practice](#practice)
-- [About Author](#about)
+- [About](#about)
 """, unsafe_allow_html=True)
 
-# ---------- INTRO ----------
-st.markdown("<a id='intro'></a>",unsafe_allow_html=True)
+# ---------------- INTRO ----------------
 st.markdown("<h2 id='intro'>📘 Introduction</h2>", unsafe_allow_html=True)
-st.write("""
-Seaborn is a Python data visualization library based on Matplotlib.
-It provides beautiful statistical graphics and works directly with Pandas DataFrames.
-""")
-st.markdown("<h4 style='color : pink'>Installation:</h4>",unsafe_allow_html=True)
+st.write("Seaborn is a Python data visualization library based on Matplotlib. It provides beautiful statistical graphics and works directly with Pandas DataFrames..")
+st.subheader("Installation")
 st.code("pip install seaborn")
-st.markdown("<h4 style='color : pink'>Importing libraries</h4>",unsafe_allow_html=True)
+st.subheader("Import Libraries") 
 st.code("""import seaborn as sns
-import matplotlib.pyplot as plt""")
-st.markdown("<h4 style='color : pink'>Built-in datasets</h4>",unsafe_allow_html=True)
-st.text("""Seaborn has some built-in datasets like :
-        tips
-        iris
-        flights
-        titanic
-        diamonds etc........""")
-st.markdown("<h4 style='color : pink'>Loading datasets</h4>",unsafe_allow_html=True)
-st.code("sns.load_dataset()")
-st.markdown("<h4 style='color : pink'>Example</h4>",unsafe_allow_html=True)
-st.code("""
-import seaborn as sns
-import matplotlib.pyplot as plt
-tips = sns.load_dataset("tips")
-""")
-st.markdown("<h4 style='color : pink'>Output</h4>",unsafe_allow_html=True)
-df = sns.load_dataset("tips")
-st.dataframe(df.head())
+         import matplotlib.pyplot as plt""")
+st.subheader("Built-in datasets") 
+st.text(""" - tips
+         - iris
+         - flights 
+         - titanic 
+         - diamonds""")
+st.subheader("Load Dataset")
+st.code("tips = sns.load_dataset('tips')")
+st.subheader("Example")
+st.code("""import seaborn as sns
+         import matplotlib as plt
+         df=sns.load_dataset('tips')
+         df.head()""")
+tips=sns.load_dataset('tips')
+st.dataframe(tips.head())
+# ---------------- TOC ----------------
+st.markdown("<h2 id='toc'>📑 Table of Contents</h2>", unsafe_allow_html=True)
+st.write("Use sidebar or links above to navigate topics.")
 
-
-
-# ---------- TABLE OF CONTENTS ----------
-st.markdown("<h2 id='tab'>📑 Table of Contents</h2>", unsafe_allow_html=True)
-
-data = [
-    # Categorical & Numerical
-    ["sns.countplot()", "sns.barplot()", "Pie Chart", "sns.histplot()"],
-    ["sns.kdeplot()", "sns.distplot()", "sns.rugplot()", "sns.boxplot()"],
-    ["sns.violinplot()", "", "", ""],
-
-    # Bivariate (Numerical vs Numerical)
-    ["sns.scatterplot()", "sns.lineplot()", "sns.regplot()", "sns.jointplot()"],
-    ["hexbin plot", "", "", ""],
-
-    # Categorical vs Numerical
-    ["sns.boxplot()", "sns.violinplot()", "sns.stripplot()", "sns.swarmplot()"],
-    ["sns.pointplot()", "sns.barplot(hue)", "", ""],
-
-    # Categorical vs Categorical
-    ["sns.countplot(hue)", "Heatmap (cross-tab)", "", ""],
-
-    # Multivariate
-    ["hue parameter", "size parameter", "style parameter", "sns.pairplot()"],
-    ["sns.FacetGrid()", "sns.relplot()", "sns.catplot()", "sns.displot()"],
-
-    # Statistical Visualization
-    ["Mean", "Median", "Confidence Interval", "Error Bars"],
-    ["Estimator functions", "Bootstrapping", "Distribution comparison", "Correlation visualization"],
-
-    # Advanced Plots
-    ["sns.heatmap()", "sns.clustermap()", "Pairwise relationships", "Time series visualization"],
-    ["Multiple subplots", "Log scale plots", "", ""],
-
-    # Customization & Styling
-    ["Figure size", "Titles & labels", "Legends", "Axis formatting"],
-    ["deep palette", "muted palette", "bright palette", "pastel palette"],
-    ["dark palette", "colorblind palette", "Custom palettes", "Markers & line styles"],
-    ["whitegrid", "darkgrid", "ticks", ""],
-
-    # Themes & Context
-    ["sns.set_style()", "sns.set_context()", "Figure aesthetics", "Font scaling"],
-
-    # Faceting & Subplots
-    ["FacetGrid", "Row faceting", "Column faceting", "Sharing axes"],
-
-    # Real Datasets
-    ["Iris dataset", "Titanic dataset", "Flights dataset", "Diamonds dataset"],
-    ["EDA", "", "", ""],
-
-    # Integration with Matplotlib
-    ["Mix seaborn & matplotlib", "Custom annotations", "plt.savefig()", "Export images"]
-]
-
-df = pd.DataFrame(data, columns=["Column 1", "Column 2", "Column 3", "Column 4"])
-
-st.dataframe(df, use_container_width=True)
-
-# ---------- CATEGORICAL ----------
-st.markdown("<h2 id='cat'>📊 Categorical Plots (Count Plot)</h2>", unsafe_allow_html=True)
-st.code("sns.countplot(x='day', data=tips)")
-plt.figure(figsize=(5,4))
+# ---------------- COUNT ----------------
+st.markdown("<h2 id='countplot'>📊 Count Plot</h2>", unsafe_allow_html=True)
+plt.figure(figsize=(4,3))
 sns.countplot(x="day", data=tips)
-st.pyplot(plt)
+st.pyplot(plt); plt.clf()
 
-# ---------- UNIVARIATE ----------
-st.markdown("<h2 id='uni'>📈 Univariate Plots (Histogram)</h2>", unsafe_allow_html=True)
-st.code("sns.histplot(tips['total_bill'], kde=True)")
-plt.figure(figsize=(5,4))
+# ---------------- BAR ----------------
+st.markdown("<h2 id='barplot'>📊 Bar Plot</h2>", unsafe_allow_html=True)
+plt.figure(figsize=(4,3))
+sns.barplot(x="day", y="total_bill", data=tips)
+st.pyplot(plt); plt.clf()
+
+# ---------------- BOX ----------------
+st.markdown("<h2 id='boxplot'>📦 Box Plot</h2>", unsafe_allow_html=True)
+plt.figure(figsize=(4,3))
+sns.boxplot(x="day", y="total_bill", data=tips)
+st.pyplot(plt); plt.clf()
+
+# ---------------- VIOLIN ----------------
+st.markdown("<h2 id='violinplot'>🎻 Violin Plot</h2>", unsafe_allow_html=True)
+plt.figure(figsize=(4,3))
+sns.violinplot(x="day", y="total_bill", data=tips)
+st.pyplot(plt); plt.clf()
+
+# ---------------- STRIP ----------------
+st.markdown("<h2 id='stripplot'>📍 Strip Plot</h2>", unsafe_allow_html=True)
+plt.figure(figsize=(4,3))
+sns.stripplot(x="day", y="total_bill", data=tips)
+st.pyplot(plt); plt.clf()
+
+# ---------------- SWARM ----------------
+st.markdown("<h2 id='swarmplot'>🐝 Swarm Plot</h2>", unsafe_allow_html=True)
+plt.figure(figsize=(4,3))
+sns.swarmplot(x="day", y="total_bill", data=tips)
+st.pyplot(plt); plt.clf()
+
+# ---------------- HIST ----------------
+st.markdown("<h2 id='histogram'>📈 Histogram</h2>", unsafe_allow_html=True)
+plt.figure(figsize=(4,3))
 sns.histplot(tips["total_bill"], kde=True)
-st.pyplot(plt)
+st.pyplot(plt); plt.clf()
 
-st.markdown("<h3>KDE Plot</h3>", unsafe_allow_html=True)
-st.code("sns.kdeplot(tips['total_bill'], fill=True)")
-plt.figure(figsize=(5,4))
+# ---------------- KDE ----------------
+st.markdown("<h2 id='kdeplot'>📈 KDE Plot</h2>", unsafe_allow_html=True)
+plt.figure(figsize=(4,3))
 sns.kdeplot(tips["total_bill"], fill=True)
-st.pyplot(plt)
+st.pyplot(plt); plt.clf()
 
-# ---------- BIVARIATE ----------
-st.markdown("<h2 id='bi'>🔹 Bivariate Plots (Scatter Plot)</h2>", unsafe_allow_html=True)
-st.code("sns.scatterplot(x='total_bill', y='tip', data=tips)")
-plt.figure(figsize=(5,4))
+# ---------------- RUG ----------------
+st.markdown("<h2 id='rugplot'>📏 Rug Plot</h2>", unsafe_allow_html=True)
+plt.figure(figsize=(4,3))
+sns.rugplot(tips["total_bill"])
+st.pyplot(plt); plt.clf()
+
+# ---------------- DIST ----------------
+st.markdown("<h2 id='distplot'>📉 Dist Plot (Deprecated)</h2>", unsafe_allow_html=True)
+plt.figure(figsize=(4,3))
+sns.histplot(tips["total_bill"])
+st.pyplot(plt); plt.clf()
+
+# ---------------- SCATTER ----------------
+st.markdown("<h2 id='scatter'>🔹 Scatter Plot</h2>", unsafe_allow_html=True)
+plt.figure(figsize=(4,3))
 sns.scatterplot(x="total_bill", y="tip", data=tips)
-st.pyplot(plt)
+st.pyplot(plt); plt.clf()
 
-st.markdown("<h3>Regression Plot</h3>", unsafe_allow_html=True)
-plt.figure(figsize=(5,4))
+# ---------------- REG ----------------
+st.markdown("<h2 id='regression'>📉 Regression Plot</h2>", unsafe_allow_html=True)
+plt.figure(figsize=(4,3))
 sns.regplot(x="total_bill", y="tip", data=tips)
-st.pyplot(plt)
+st.pyplot(plt); plt.clf()
 
-# ---------- MULTIVARIATE ----------
-st.markdown("<h2 id='multi'>📍 Multivariate Plot (Point Plot)</h2>", unsafe_allow_html=True)
-st.code("sns.pointplot(x='day', y='total_bill', data=tips)")
-plt.figure(figsize=(5,4))
+# ---------------- LINE ----------------
+st.markdown("<h2 id='lineplot'>📈 Line Plot</h2>", unsafe_allow_html=True)
+plt.figure(figsize=(4,3))
+sns.lineplot(x="size", y="total_bill", data=tips)
+st.pyplot(plt); plt.clf()
+
+# ---------------- JOINT ----------------
+st.markdown("<h2 id='jointplot'>🔗 Joint Plot</h2>", unsafe_allow_html=True)
+fig = sns.jointplot(x="total_bill", y="tip", data=tips)
+st.pyplot(fig.fig)
+
+# ---------------- HEXBIN ----------------
+st.markdown("<h2 id='hexbin'>⬢ Hexbin Plot</h2>", unsafe_allow_html=True)
+plt.figure(figsize=(4,3))
+plt.hexbin(tips["total_bill"], tips["tip"], gridsize=20, cmap="Blues")
+st.pyplot(plt); plt.clf()
+
+# ---------------- POINT ----------------
+st.markdown("<h2 id='pointplot'>🌐 Point Plot</h2>", unsafe_allow_html=True)
+plt.figure(figsize=(4,3))
 sns.pointplot(x="day", y="total_bill", data=tips)
-st.pyplot(plt)
+st.pyplot(plt); plt.clf()
 
-# ---------- MATRIX ----------
-st.markdown("<h2 id='matrix'>🔥 Matrix Plot (Heatmap)</h2>", unsafe_allow_html=True)
-st.code("sns.heatmap(tips.corr(numeric_only=True), annot=True)")
-plt.figure(figsize=(5,4))
+# ---------------- PAIR ----------------
+st.markdown("<h2 id='pairplot'>🌸 Pair Plot</h2>", unsafe_allow_html=True)
+fig = sns.pairplot(iris)
+st.pyplot(fig)
+
+# ---------------- HEATMAP ----------------
+st.markdown("<h2 id='heatmap'>🔥 Heatmap</h2>", unsafe_allow_html=True)
+plt.figure(figsize=(4,3))
 sns.heatmap(tips.corr(numeric_only=True), annot=True, cmap="coolwarm")
-st.pyplot(plt)
+st.pyplot(plt); plt.clf()
 
-st.markdown("<h3>Pair Plot</h3>", unsafe_allow_html=True)
-st.pyplot(sns.pairplot(iris))
+# ---------------- CLUSTER ----------------
+st.markdown("<h2 id='clustermap'>🧩 Clustermap</h2>", unsafe_allow_html=True)
+cluster = sns.clustermap(tips.corr(numeric_only=True))
+st.pyplot(cluster.fig)
 
-# ---------- DASHBOARD ----------
-st.markdown("<h2 id='dashboard'>📊 Dashboard Section</h2>", unsafe_allow_html=True)
-st.write("This section can be used to combine multiple plots into one dashboard.")
-
-# ---------- PRACTICE ----------
-st.markdown("<h2 id='practice'>✍ Practice</h2>", unsafe_allow_html=True)
-st.write("""
-1. Create a histogram of tips  
-2. Create a boxplot of total_bill vs day  
-3. Create a heatmap of correlations  
+# ---------------- STYLE ----------------
+st.markdown("<h2 id='style'>🎨 Styling & Themes</h2>", unsafe_allow_html=True)
+st.code("""
+sns.set_style("whitegrid")
+sns.set_context("talk")
+sns.color_palette("colorblind")
 """)
 
-# ---------- ABOUT ----------
-st.markdown("<h2 id='about'>👨‍💻 About Author</h2>", unsafe_allow_html=True)
+# ---------------- FACET ----------------
+st.markdown("<h2 id='facet'>🧩 Faceting</h2>", unsafe_allow_html=True)
+g = sns.FacetGrid(tips, col="sex", row="time")
+g.map(sns.histplot, "total_bill")
+st.pyplot(g.fig)
+
+# ---------------- DATASETS ----------------
+st.markdown("<h2 id='datasets'>📂 Real Datasets</h2>", unsafe_allow_html=True)
+st.dataframe(titanic.head())
+
+# ---------------- PRACTICE ----------------
+st.markdown("<h2 id='practice'>✍ Practice</h2>", unsafe_allow_html=True)
+st.write("Try creating your own plots using tips and titanic datasets.")
+
+# ---------------- ABOUT ----------------
+st.markdown("<h2 id='about'>👨‍💻 About</h2>", unsafe_allow_html=True)
+st.write("This is a complete Seaborn Learning Dashboard.")
