@@ -1,22 +1,22 @@
 import streamlit as st
-import pandas as pd
-if st.button("Back to Home"):
-    st.switch_page("main.py")
-
 import time
-#Animation
-import streamlit as st
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
+# ---------------- PAGE CONFIG ----------------
 st.set_page_config(page_title="StudyNest", layout="wide")
 
-logo_path = "StudyNest_logo.png"   # apna logo file yaha rakho
+# ---------------- BACK BUTTON ----------------
+if st.button("⬅ Back to Home"):
+    st.switch_page("main.py")
 
+# ---------------- CSS STYLE ----------------
 st.markdown("""
 <style>
-
-/* 🌊 Professional Animated Background */
+/* 🌟 Black & Gold Animated Background */
 .stApp {
-    background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1e3c72);
+    background: linear-gradient(-45deg, #000000, #1a1a1a, #b8860b, #ffd700);
     background-size: 300% 300%;
     animation: gradientBG 15s ease infinite;
 }
@@ -27,35 +27,20 @@ st.markdown("""
     100% {background-position: 0% 50%;}
 }
 
-/* 🖼️ Floating Logo */
-.logo {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 40px;
-    animation: float 4s ease-in-out infinite;
-}
-
-@keyframes float {
-    0% {transform: translateY(0px);}
-    50% {transform: translateY(-15px);}
-    100% {transform: translateY(0px);}
-}
-
 /* ✨ Title */
 .fade-text {
     text-align: center;
     font-size: 48px;
-    color: #ffffff;
+    color: gold;
     animation: fadeIn 2.5s ease-in;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 /* Subtitle */
 .subtitle {
     text-align: center;
     font-size: 22px;
-    color: #dcdcdc;
+    color: #f5f5f5;
     margin-bottom: 40px;
 }
 
@@ -65,12 +50,29 @@ st.markdown("""
     to {opacity: 1; transform: translateY(0);}
 }
 
+/* Banner */
+.top-banner {
+    background: linear-gradient(to right, #b8860b, #ffd700);
+    padding: 12px;
+    text-align: center;
+    color: black;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-top: 20px;
+}
 </style>
 """, unsafe_allow_html=True)
 
-# 🖼️ Logo
-st.markdown(f"""
-<img src="file:///{logo_path}" class="logo" width="260">
+# ---------------- TEXT ----------------
+st.markdown('<h1 class="fade-text">Welcome to StudyNest</h1>', unsafe_allow_html=True)
+st.markdown('<p class="subtitle">Learn • Practice • Grow with Interactive Notes</p>', unsafe_allow_html=True)
+
+# ---------------- BANNER ----------------
+st.markdown("""
+<div class="top-banner">
+✨ 📘 Welcome to StudyNest – Your Smart Learning Hub ✨
+</div>
 """, unsafe_allow_html=True)
 
 # ✨ Text
