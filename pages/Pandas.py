@@ -230,17 +230,5 @@ if st.button("Run", key="is_unique"):
     s = pd.Series([85, 90, 88, 92, 90])
     st.code(s.is_unique)
     
-st.text("index = Return the index labels of the Series")
-
-st.code("""import pandas as pd
-marks = [85, 90, 88, 92]
-s = pd.Series(marks)
-s.index
-""")
-
-if st.button("Run", key="index"):
-    s = pd.Series([85, 90, 88, 92])
-    st.code(s.index)
-
 
 
