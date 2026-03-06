@@ -12,25 +12,18 @@ if st.button("⬅ Back to Home"):
 # ---------------- CSS STYLE ----------------
 st.markdown("""
 <style>
-/* 🌟 Black & Gold Animated Background */
-.stApp {
-    background: linear-gradient(-45deg, #000000, #1a1a1a, #b8860b, #ffd700);
-    background-size: 300% 300%;
-    animation: gradientBG 15s ease infinite;
-}
 
-@keyframes gradientBG {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
+/* 🌑 Professional Dark Background */
+.stApp {
+    background-color: #0f172a;   /* Deep Navy Professional Color */
 }
 
 /* ✨ Title */
 .fade-text {
     text-align: center;
     font-size: 48px;
-    color: gold;
-    animation: fadeIn 2.5s ease-in;
+    color: #FFD700;
+    animation: fadeIn 2s ease-in;
     margin-top: 40px;
 }
 
@@ -38,7 +31,7 @@ st.markdown("""
 .subtitle {
     text-align: center;
     font-size: 22px;
-    color: #f5f5f5;
+    color: #e5e7eb;
     margin-bottom: 40px;
 }
 
@@ -50,7 +43,7 @@ st.markdown("""
 
 /* Banner */
 .top-banner {
-    background: linear-gradient(to right, #b8860b, #ffd700);
+    background: #FFD700;
     padding: 12px;
     text-align: center;
     color: black;
@@ -59,6 +52,7 @@ st.markdown("""
     border-radius: 8px;
     margin-top: 20px;
 }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -72,6 +66,9 @@ st.markdown("""
 ✨ 📘 Welcome to StudyNest – Your Smart Learning Hub ✨
 </div>
 """, unsafe_allow_html=True)
+
+
+
 
 st.markdown('<h1 style="  text-align: center;">Pandas</h1>', unsafe_allow_html=True)
 st.text("pandas is a fast ,powerful,flexible and easy to use ope source data analysis and manlpulation tool,built on top of the python programming language.")
@@ -148,6 +145,13 @@ if st.button("Run", key="5"):
     data = {'a':10, 'b':20, 'c':30, 'd':40}
     s = pd.Series(data)
     st.code(s.to_string() + f"\ndtype: {s.dtype}")
+
+
+
+
+
+
+    #.......................................................
 
 st.markdown('<h3 style=" color:yellow;text-align: center; ">Series Attributes</h3>', unsafe_allow_html=True)
 st.text("size = Return the number of elements in the Series")
@@ -230,5 +234,74 @@ if st.button("Run", key="is_unique"):
     s = pd.Series([85, 90, 88, 92, 90])
     st.code(s.is_unique)
     
+st.text("Value : Returns the data contained in the Series as a Numpy array")
+
+st.code("""import pandas as pd
+marks = [85, 90, 88, 92, 90,dtype='int64']
+s = pd.Series(marks)
+s.values
+""")
+
+#..............................................
+st.markdown('<h3 style=" color:yellow;text-align: center; ">Series Using read_csv</h3>', unsafe_allow_html=True)
+st.code("""sub=pd.read_csv("paste link of data")""")
+st.markdown('<b style=" color:yellow;">Pandas.read_csv</b>', unsafe_allow_html=True)
+st.text("Automatically converts everything into data frames not in series.")
+st.code("type(sub)")
+st.text("Output :")
+st.code("pandas.core.frame.DataFrame")
+st.code("sub.head(5)")
+st.text("Output :")
+d={0:34,1:44,2:32,3:55,4:67}
+st.table(d)
+st.markdown('<b style=" color:yellow;">To convert data into series</b>', unsafe_allow_html=True)
+st.text("""we have to apply a parameter called as "Squeeze" is equals to True.""")
+st.code("""sub=pd.read_csv("subs.csv",sequeeze=True)
+        type(sub)""")
+st.text("Output :")
+st.code("pandas.core.series.Series")
+st.code("""#with two column
+        movies=pd.read_csv("bollywood.csv",index_col="movie",sequeeze=True)
+        movies""")
+st.text("Output")
+m={'movies':"values ",
+   "Uri:The Surgical Strike":"Vicky Kaushal",
+   "Battalion 609":"Vicky Ahuja",
+   "The Accidental Prime Ministre (film)":"Anupam",
+   "Why cheat India":"Emraan Hashmi"}
+st.table(m)
+
+#................................
+st.markdown('<h3 style=" color:yellow;text-align: center; ">Series Methods</h3>', unsafe_allow_html=True)
+st.text("head(n):Return the first n element of the Series.")
+st.code("sub.head()")
+st.text("tail(n):Return the last n element of the Series.")
+st.code("sub.tail()")
+st.text("sample(): Gives random data")
+st.code("sub.sample()")
+st.text("value_counts: Return a Series containing the counts of unique values in the Series.")
+st.code("sub.value_counts()")
+st.text("sort_values(): return a sorted Series by values")
+st.code("sub.sort_values()")
+
+st.code("sub.sort_values(ascending=False).head(1).values[0]")
+st.code("""#For permanenet Changes use Inplace
+        sub.sort_values(inplace=True)""")
+
+st.code("""#sort by index
+        sub.sort_index()
+        # for ascending
+        sub.sort_index(ascending=False) """)
+
+st.markdown('<h3 style=" color:yellow;text-align: center; ">Series Math Methods</h3>', unsafe_allow_html=True)
+
+
+
+
+
+
+
+
+
 
 
