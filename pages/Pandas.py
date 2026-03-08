@@ -271,37 +271,351 @@ m={'movies':"values ",
    "Why cheat India":"Emraan Hashmi"}
 st.table(m)
 
-#................................
-st.markdown('<h3 style=" color:yellow;text-align: center; ">Series Methods</h3>', unsafe_allow_html=True)
-st.text("head(n):Return the first n element of the Series.")
-st.code("sub.head()")
-st.text("tail(n):Return the last n element of the Series.")
-st.code("sub.tail()")
-st.text("sample(): Gives random data")
-st.code("sub.sample()")
-st.text("value_counts: Return a Series containing the counts of unique values in the Series.")
-st.code("sub.value_counts()")
-st.text("sort_values(): return a sorted Series by values")
-st.code("sub.sort_values()")
+st.markdown('<h3 style="color:yellow;text-align:center;">Series Methods</h3>', unsafe_allow_html=True)
 
-st.code("sub.sort_values(ascending=False).head(1).values[0]")
-st.code("""#For permanenet Changes use Inplace
-        sub.sort_values(inplace=True)""")
-
-st.code("""#sort by index
-        sub.sort_index()
-        # for ascending
-        sub.sort_index(ascending=False) """)
-
-st.markdown('<h3 style=" color:yellow;text-align: center; ">Series Math Methods</h3>', unsafe_allow_html=True)
+# -------- Dataset --------
+st.code("""#Dataset
+        data = [45, 60, 75, 60, 90, 30, 75, 60, 85, 40]
+sub = pd.Series(data, name="Marks")
+""")
+data = [45, 60, 75, 60, 90, 30, 75, 60, 85, 40]
+sub = pd.Series(data, name="Marks")
+st.subheader("Original Series")
+st.write(sub)
 
 
+# =================================================
+# HEAD
+# =================================================
+st.markdown('<h4 style="color:pink;">head(n)</h4>', unsafe_allow_html=True)
+st.text("Return the first n elements of the Series.")
+
+st.code("""
+sub.head(3)
+""")
+
+if st.button("Run head()", key="head"):
+    
+    st.subheader("head(3) Output")
+    st.write(sub.head(3))
+
+
+# =================================================
+# TAIL
+# =================================================
+st.markdown('<h4 style="color:pink;">tail(n)</h4>', unsafe_allow_html=True)
+st.text("Return the last n elements of the Series.")
+
+st.code("""
+sub.tail(3)
+""")
+
+if st.button("Run tail()", key="tail"):
+    
+    st.subheader("tail(3) Output")
+    st.write(sub.tail(3))
+
+
+# =================================================
+# SAMPLE
+# =================================================
+st.markdown('<h4 style="color:pink;">sample()</h4>', unsafe_allow_html=True)
+st.text("Return random elements from the Series.")
+
+st.code("""
+sub.sample(3)
+""")
+
+if st.button("Run sample()", key="sample"):
+    
+    st.subheader("sample(3) Output")
+    st.write(sub.sample(3))
+
+
+# =================================================
+# VALUE COUNTS
+# =================================================
+st.markdown('<h4 style="color:pink;">value_counts()</h4>', unsafe_allow_html=True)
+st.text("Return counts of unique values in the Series.")
+
+st.code("""
+sub.value_counts()
+""")
+
+if st.button("Run value_counts()", key="value"):
+    
+    st.subheader("value_counts() Output")
+    st.write(sub.value_counts())
+
+
+# =================================================
+# SORT VALUES
+# =================================================
+st.markdown('<h4 style="color:pink;">sort_values()</h4>', unsafe_allow_html=True)
+st.text("Return a sorted Series by values.")
+
+st.code("""
+sub.sort_values()
+""")
+
+if st.button("Run sort_values()", key="sort"):
+    
+    st.subheader("Sorted Values")
+    st.write(sub.sort_values())
+
+
+# =================================================
+# HIGHEST VALUE
+# =================================================
+st.markdown('<h4 style="color:pink;">Highest Value</h4>', unsafe_allow_html=True)
+st.text("Return the highest value from the Series.")
+
+st.code("""
+sub.sort_values(ascending=False).head(1).values[0]
+""")
+
+if st.button("Run Highest Value", key="max"):
+    
+
+    st.subheader("Highest Value")
+    st.write(sub.sort_values(ascending=False).head(1).values[0])
+
+
+# =================================================
+# SORT INDEX
+# =================================================
+st.markdown('<h4 style="color:pink;">sort_index()</h4>', unsafe_allow_html=True)
+st.text("Sort the Series by index.")
+
+st.code("""
+sub.sort_index()
+sub.sort_index(ascending=False)
+""")
+
+if st.button("Run sort_index()", key="index10"):
+    
+
+    st.subheader("Sorted by Index")
+    st.write(sub.sort_index())
+
+    st.subheader("Descending Index")
+    st.write(sub.sort_index(ascending=False))
+st.markdown('<h3 style="color:yellow;text-align:center;">Series Math Methods</h3>', unsafe_allow_html=True)
+st.markdown('<p style=" color:yellow;">Diffence between Count And Size</p>',unsafe_allow_html=True) 
+st.text("count gives the total number of items present in the series . But only NON missing values but, if we have missing values , it dosent count them . But , size gives the total item including missing value .")
+# ---------------- COUNT ----------------
+st.markdown('<h4 style="color:pink;">count()</h4>', unsafe_allow_html=True)
+
+st.text("count() returns the total number of non-null values present in the Series.")
+
+st.code("""
+sub.count()
+""")
+st.code("""# Dataset
+        data = [10, 20, 30, 40, 50]
+sub = pd.Series(data)""")
+data = [10, 20, 30, 40, 50]
+sub = pd.Series(data)
+
+st.subheader("Original Series")
+st.write(sub)
+
+
+if st.button("Run count()", key="count"):
+    import pandas as pd
+
+    st.subheader("count() Output")
+    st.write(sub.count())
+
+
+# ---------------- SIZE ----------------
+st.markdown('<h4 style="color:pink;">size</h4>', unsafe_allow_html=True)
+
+st.text("size returns the total number of elements in the Series including missing values.")
+
+st.code("""
+sub.size
+""")
+
+if st.button("Run size", key="size1"):
+    import pandas as pd
+    st.subheader("size Output")
+    st.write(sub.size)
+
+
+# ---------------- SUM ----------------
+st.markdown('<h4 style="color:pink;">sum()</h4>', unsafe_allow_html=True)
+
+st.text("sum() returns the total sum of all values present in the Series.")
+
+st.code("""
+sub.sum()
+""")
+
+if st.button("Run sum()", key="sum"):
+    import pandas as pd
+    
+    st.subheader("sum() Output")
+    st.write(sub.sum())
+
+
+# ---------------- PRODUCT ----------------
+st.markdown('<h4 style="color:pink;">product()</h4>', unsafe_allow_html=True)
+
+st.text("product() returns the multiplication of all values present in the Series.")
+
+st.code("""
+sub.product()
+""")
+
+if st.button("Run product()", key="product"):
+    import pandas as pd
+
+
+    st.subheader("product() Output")
+    st.write(sub.product())
 
 
 
 
+st.markdown('<h3 style=" color:yellow;text-align: center; ">Statical Methods</h3>', unsafe_allow_html=True)
+st.code("""#data
+        data = [12, 15, 18, 20, 22, 25, 25, 30, 35, 40]
+sub = pd.Series(data, name="Marks")""")
+data = [12, 15, 18, 20, 22, 25, 25, 30, 35, 40]
+sub = pd.Series(data, name="Marks")
+
+st.markdown("<h4 style='color:pink;'>Mean()</h4>", unsafe_allow_html=True)
+
+st.write("Mean returns the **average value** of all elements present in the Series.")
+
+code_mean = """
+sub.mean()
+"""
+
+st.code(code_mean, language="python")
+
+if st.button("Run Mean"):
+    st.write("Output:", sub.mean())
 
 
+
+st.markdown("<h4 style='color:pink;'>Median()</h4>", unsafe_allow_html=True)
+
+st.write("Median returns the **middle value** of the Series after sorting the data.")
+
+code_median = """
+sub.median()
+"""
+
+st.code(code_median, language="python")
+
+if st.button("Run Median"):
+    st.write("Output:", sub.median())
+
+
+# =====================================================
+# MODE
+# =====================================================
+st.markdown("<h4 style='color:pink;'>Mode()</h4>", unsafe_allow_html=True)
+
+st.write("Mode returns the **most frequently occurring value** in the Series.")
+
+code_mode = """
+sub.mode()
+"""
+
+st.code(code_mode, language="python")
+
+if st.button("Run Mode"):
+    st.write("Output:")
+    st.write(sub.mode())
+
+
+# =====================================================
+# STANDARD DEVIATION
+# =====================================================
+st.markdown("<h4 style='color:pink;'>Standard Deviation (std)</h4>", unsafe_allow_html=True)
+
+st.write("Standard deviation measures the **spread of data around the mean**.")
+
+code_std = """
+sub.std()
+"""
+
+st.code(code_std, language="python")
+
+if st.button("Run STD"):
+    st.write("Output:", sub.std())
+
+
+# =====================================================
+# VARIANCE
+# =====================================================
+st.markdown("<h4 style='color:pink;'>Variance (var)</h4>", unsafe_allow_html=True)
+
+st.write("Variance measures **how far each number in the dataset is from the mean**.")
+
+code_var = """
+sub.var()
+"""
+
+st.code(code_var, language="python")
+
+if st.button("Run Variance"):
+    st.write("Output:", sub.var())
+
+
+# =====================================================
+# MIN
+# =====================================================
+st.markdown("<h4 style='color:pink;'>Minimum Value (min)</h4>", unsafe_allow_html=True)
+
+st.write("Min returns the **smallest value** present in the Series.")
+
+code_min = """
+sub.min()
+"""
+
+st.code(code_min, language="python")
+
+if st.button("Run Min"):
+    st.write("Output:", sub.min())
+
+
+# =====================================================
+# MAX
+# =====================================================
+st.markdown("<h4 style='color:pink;'>Maximum Value (max)</h4>", unsafe_allow_html=True)
+
+st.write("Max returns the **largest value** present in the Series.")
+
+code_max = """
+sub.max()
+"""
+
+st.code(code_max, language="python")
+
+if st.button("Run Max"):
+    st.write("Output:", sub.max())
+
+
+# =====================================================
+# DESCRIBE
+# =====================================================
+st.markdown("<h4 style='color:pink;'>Describe()</h4>", unsafe_allow_html=True)
+
+st.write("Describe returns the **complete statistical summary** of the Series.")
+
+code_describe = """
+sub.describe()
+"""
+
+st.code(code_describe, language="python")
+
+if st.button("Run Describe"):
+    st.write("Output:")
+    st.write(sub.describe())
 
 
 

@@ -64,11 +64,6 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ✨ Text
-st.markdown('<h1 class="fade-text">Welcome to StudyNest</h1>', unsafe_allow_html=True)
-st.markdown('<p class="subtitle">Learn • Practice • Grow with Interactive Notes</p>', unsafe_allow_html=True)
-
-
 
 
 st.set_page_config(page_title="Python Dictionary ", layout="wide")

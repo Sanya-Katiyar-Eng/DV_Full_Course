@@ -1,4 +1,6 @@
 import streamlit as st
+import pandas as pd
+import time
 st.set_page_config(page_title="StudyNest", layout="wide")
 
 # ---------------- BACK BUTTON ----------------

@@ -63,30 +63,6 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ✨ Text
-st.markdown('<h1 class="fade-text">Welcome to StudyNest</h1>', unsafe_allow_html=True)
-st.markdown('<p class="subtitle">Learn • Practice • Grow with Interactive Notes</p>', unsafe_allow_html=True)
-
-
-
-st.markdown("""
-<style>
-.top-banner {
-    background: linear-gradient(to right, #6a11cb, #2575fc);
-    padding: 10px;
-    text-align: center;
-    color: white;
-    font-size: 22px;
-    font-weight: bold;
-    border-radius: 5px;
-}
-</style>
-
-<div class="top-banner">
- 📘 Welcome to StudyNest
-</div>
-""", unsafe_allow_html=True)
-
 
 
 

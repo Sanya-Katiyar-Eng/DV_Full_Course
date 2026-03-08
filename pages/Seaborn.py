@@ -1,6 +1,5 @@
 import streamlit as st
-
-# ---------------- PAGE CONFIG ----------------
+import seaborn as sns
 st.set_page_config(page_title="StudyNest", layout="wide")
 
 # ---------------- BACK BUTTON ----------------
@@ -10,25 +9,18 @@ if st.button("⬅ Back to Home"):
 # ---------------- CSS STYLE ----------------
 st.markdown("""
 <style>
-/* 🌟 Black & Gold Animated Background */
-.stApp {
-    background: linear-gradient(-45deg, #000000, #1a1a1a, #b8860b, #ffd700);
-    background-size: 300% 300%;
-    animation: gradientBG 15s ease infinite;
-}
 
-@keyframes gradientBG {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
+/* 🌑 Professional Dark Background */
+.stApp {
+    background-color: #0f172a;   /* Deep Navy Professional Color */
 }
 
 /* ✨ Title */
 .fade-text {
     text-align: center;
     font-size: 48px;
-    color: gold;
-    animation: fadeIn 2.5s ease-in;
+    color: #FFD700;
+    animation: fadeIn 2s ease-in;
     margin-top: 40px;
 }
 
@@ -36,7 +28,7 @@ st.markdown("""
 .subtitle {
     text-align: center;
     font-size: 22px;
-    color: #f5f5f5;
+    color: #e5e7eb;
     margin-bottom: 40px;
 }
 
@@ -48,7 +40,7 @@ st.markdown("""
 
 /* Banner */
 .top-banner {
-    background: linear-gradient(to right, #b8860b, #ffd700);
+    background: #FFD700;
     padding: 12px;
     text-align: center;
     color: black;
@@ -57,6 +49,7 @@ st.markdown("""
     border-radius: 8px;
     margin-top: 20px;
 }
+
 </style>
 """, unsafe_allow_html=True)
 
