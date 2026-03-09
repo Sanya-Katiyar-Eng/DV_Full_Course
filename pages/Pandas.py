@@ -617,5 +617,123 @@ if st.button("Run Describe"):
     st.write("Output:")
     st.write(sub.describe())
 
+#.......................................................................
+
+st.markdown('<h3 style=" color:yellow;text-align: center; ">Series Indexing</h3>', unsafe_allow_html=True)
+
+st.code("""
+import pandas as pd
+x = pd.Series([12,13,14,35,46,57,58,79,9])
+""")
+
+x = pd.Series([12,13,14,35,46,57,58,79,9])
+
+st.subheader("Example Series")
+st.write(x)
+
+# ---------------- Basic Indexing ----------------
+
+st.subheader("Basic Indexing")
+
+st.code("x[1]")
+st.text("Output")
+st.write(x[1])
+
+st.code("x[0]")
+st.text("Output")
+st.write(x[0])
+
+# correct way for last value
+st.code("x.iloc[-1]")
+st.text("Output")
+st.write(x.iloc[-1])
+
+# ---------------- Slicing ----------------
+
+st.subheader("Series Slicing")
+
+st.code("x[4:10]")
+st.text("Output")
+st.write(x[4:10])
+
+st.code("x[-5:]")
+st.text("Output")
+st.write(x[-5:])
+
+st.code("x[::2]")
+st.text("Output")
+st.write(x[::2])
+
+# ---------------- Fancy Indexing ----------------
+
+st.subheader("Fancy Indexing")
+
+st.code("x[[0,3,5]]")
+st.text("Output")
+st.write(x[[0,3,5]])
+
+# ---------------- Fancy Indexing Table ----------------
+
+st.subheader("Fancy Indexing with Table")
+
+st.code("""
+index_list=[1,4,7]
+x[index_list]
+""")
+
+index_list=[1,4,7]
+result = x[index_list]
+
+st.text("Output")
+st.write(result)
+#...........................................................
+st.markdown('<h3 style=" color:yellow;text-align: center; ">Editing the Series</h3>', unsafe_allow_html=True)
+m=pd.Series({'math':67,'english':57,'scince':89,'hindi':100})
+
+st.write(m)
+st.code("""import pandas as pd
+        m=pd.Series({'math':67,'english':57,'scince':89,'hindi':100})
+        m""")
+st.text("Series : ")
+st.write(m)
+st.code("""import pandas as pd
+        m[1]=88
+        m""")
+m[1]=88
+st.write(m)
+
+st.code("""import pandas as pd
+        m['social']=90
+        m""")
+m['social']=90
+st.write(m)
+#..................................................................
+
+st.markdown('<h3 style=" color:yellow;text-align: center; ">Series with python Functionalities</h3>', unsafe_allow_html=True)
+st.code("""print("len :",len(m))
+        print("type :",type(m))
+        print("sorted:",sorted(m))
+        print("min :",min(m))
+        print("max :",max(m))
+        print("list :",list(m))
+        'english' in m
+        """)
+
+st.subheader("Output")
+
+st.write("len :", len(m))
+#st.write("type :", type(m))
+st.write("sorted :", sorted(m))
+st.write("min :", min(m))
+st.write("max :", max(m))
+st.write("list :", list(m))
+st.write("'english' in m :", 'english' in m)
+#lopping.........................
+st.markdown('<h3 style=" color:yellow;text-align: center; ">Looping</h3>', unsafe_allow_html=True)
+st.code("""for i in m:
+        print(i)""")
+
+
+
 
 
