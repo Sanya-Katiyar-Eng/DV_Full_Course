@@ -1,5 +1,6 @@
 import streamlit as st
 import seaborn as sns
+import matplotlib.pyplot as plt
 st.set_page_config(page_title="StudyNest", layout="wide")
 
 # ---------------- BACK BUTTON ----------------
@@ -127,7 +128,8 @@ st.sidebar.markdown("""
 """, unsafe_allow_html=True)
 
 # ---------------- INTRO ----------------
-st.markdown("<h2 id='intro'>📘 Introduction</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='color:yellow;text-align:center;'>Introduction</2>", unsafe_allow_html=True)
+st.markdown("<a id='intro'></a>", unsafe_allow_html=True)
 st.write("""
 Seaborn is a Python data visualization library based on Matplotlib.
 It provides beautiful statistical graphics and works directly with Pandas DataFrames.
@@ -207,6 +209,8 @@ st.markdown("<h4 style='text-align:center; color:cyan;'>📊 COUNT PLOT IN SEABO
 
 st.text("Used when one variable is categorical.")
 # ---------------- COUNT PLOT ----------------
+st.markdown("<a id='countplot'></a>", unsafe_allow_html=True)
+
 st.markdown("<h2 id='countplot'>📊 Count Plot</h2>", unsafe_allow_html=True)
 
 # Page Config
@@ -353,6 +357,7 @@ st.markdown("""
 ✔ Can be customized using palette, order, hue, saturation  
 """)
 # ---------------- BAR PLOT ----------------
+st.markdown("<a id='barplot'></a>", unsafe_allow_html=True)
 st.markdown("<h2 id='barplot'>📊 Bar Plot</h2>", unsafe_allow_html=True)
 
 
@@ -520,6 +525,7 @@ st.markdown("""
 """)
 #-------
 # -----------BOX PLOT------------------------
+st.markdown("<a id='boxplot'></a>", unsafe_allow_html=True)
 st.markdown("<h2 id='boxplot'>📊 Box Plot</h2>", unsafe_allow_html=True)
 
 
@@ -681,6 +687,7 @@ st.markdown("""
 """)
 st.markdown("<h2 id='violinplot'>📊 Violin Plot</h2>", unsafe_allow_html=True)
 #------------------violin plot---------------------
+st.markdown("<a id='violinplot'></a>", unsafe_allow_html=True)
 st.set_page_config(page_title="Violin Plot - Seaborn", layout="wide")
 
 # Title
@@ -844,6 +851,7 @@ st.markdown("""
 ✔ Can be customized using palette, order, hue, split, inner, linewidth  
 """)
 #-------------strip plot--------------
+st.markdown("<a id='stripplot'></a>", unsafe_allow_html=True)
 st.markdown("<h2 id='stripplot'>📊 Strip Plot</h2>", unsafe_allow_html=True)
 st.set_page_config(page_title="Strip Plot - Seaborn", layout="wide")
 
@@ -1010,6 +1018,7 @@ st.markdown("""
 ✔ Can be customized using palette, hue, jitter, dodge, size, alpha  
 """)
 #-------------------swarm plot==========
+st.markdown("<a id='swarmplot'></a>", unsafe_allow_html=True)
 st.markdown("<h2 id='swarmplot'>📊 Swarm Plot</h2>", unsafe_allow_html=True)
 st.set_page_config(page_title="Swarm Plot - Seaborn", layout="wide")
 
@@ -1171,6 +1180,7 @@ st.markdown("""
 ✔ Can be customized using palette, hue, dodge, size, alpha  
 """)
 #---------------point plot-----------------
+st.markdown("<a id='pointplot'></a>", unsafe_allow_html=True)
 st.markdown("<h2 id='pointplot'>📊 Point Plot</h2>", unsafe_allow_html=True)
 st.set_page_config(page_title="Point Plot - Seaborn", layout="wide")
 
@@ -1370,7 +1380,7 @@ Small ticks show karta hai each data point ke liye
 Distplot (old)
 
 Histogram + KDE together (now deprecated)  """)
-
+st.markdown("<a id='histogram'></a>", unsafe_allow_html=True)
 # ---------------- HISTOGRAM ----------------
 st.markdown("<h2 id='histogram'>📈 Histogram</h2>", unsafe_allow_html=True)
 st.set_page_config(page_title="Histogram - Seaborn", layout="wide")
@@ -1534,7 +1544,7 @@ st.markdown("""
 ✔ Supports 3 variables using displot  
 ✔ Can be customized using bins, hue, kde, palette, stat, element  
 """)
-
+st.markdown("<a id='kdeplot'></a>", unsafe_allow_html=True)
 # ---------------- KDE ----------------
 st.markdown("<h2 id='kdeplot'>📈 KDE Plot</h2>", unsafe_allow_html=True)
 st.markdown("<h2 id='kdeplot'>📈 KDE Plot</h2>", unsafe_allow_html=True)
@@ -1696,6 +1706,7 @@ st.markdown("""
 ✔ Supports 3 variables using displot  
 ✔ Can be customized using fill, bw_adjust, palette, cut  
 """)
+st.markdown("<a id='distplot'></a>", unsafe_allow_html=True)
 #=================dist===========================
 st.markdown("<h2 id='distplot'>📈 Dist Plot</h2>", unsafe_allow_html=True)
 
@@ -1899,6 +1910,7 @@ st.markdown("""
 ✔ Can be customized using bins, kde, stat, palette  
 """)
 #=================rug=========
+st.markdown("<a id='rugplot'></a>", unsafe_allow_html=True)
 st.markdown("<h2 id='rugplot'>📈 Rug Plot</h2>", unsafe_allow_html=True)
 
 
@@ -2054,6 +2066,7 @@ st.markdown("""
 ✔ Supports 3 variables using displot  
 ✔ Can be customized using height, alpha, palette  
 """)
+st.markdown("<a id='ecd'></a>", unsafe_allow_html=True)
 #=======================ecdf============
 st.markdown("<h2 id='ecd'>📈 ECDF Plot</h2>", unsafe_allow_html=True)
 
@@ -2252,7 +2265,7 @@ st.markdown("""
 
 
 #===================reg plot
-
+st.markdown("<a id='reg'></a>", unsafe_allow_html=True)
 st.title("📈 Regression & Trend")
 
 # ---------------- Definition ----------------
@@ -2439,6 +2452,7 @@ st.markdown("""
 ✔ Supports 3 variables using lmplot / FacetGrid  
 ✔ Can be customized using ci, order, line_kws  
 """)
+st.markdown("<a id='lmplot'></a>", unsafe_allow_html=True)
 #lm plot
 
 st.set_page_config(page_title="LM Plot - Seaborn", layout="wide")
@@ -2629,7 +2643,7 @@ st.markdown("""
 - Helps in trend and pattern analysis.
 """)
 
-
+st.markdown("<a id='scatter'></a>", unsafe_allow_html=True)
 # ---------------- SCATTER ----------------
 st.markdown("<h2 id='scatter'>🔹 Scatter Plot</h2>", unsafe_allow_html=True)
 st.set_page_config(page_title="Scatter Plot - Seaborn", layout="wide")
@@ -2795,7 +2809,7 @@ st.markdown("""
 ✔ Can be customized using palette, alpha, marker, size  
 """)
 
-
+st.markdown("<a id='lineplot'></a>", unsafe_allow_html=True)
 #==================line plot-------------------
 st.markdown("<h2 id='lineplot'>🔹 Line Plot</h2>", unsafe_allow_html=True)
 
@@ -2986,6 +3000,7 @@ st.markdown("""
 - Useful for detailed data analysis.
 - Supports regression, KDE, and hex plots.
 """)
+st.markdown("<a id='pairplot'></a>", unsafe_allow_html=True)
 st.markdown("<h2 id='pairplot'>🌐 Pair Plot</h2>", unsafe_allow_html=True)
 
 st.set_page_config(page_title="Pair Plot - Seaborn", layout="wide")
@@ -3143,7 +3158,7 @@ st.markdown("""
 ✔ Helps detect correlation and outliers  
 """)
 
-
+st.markdown("<a id='jointplot'></a>", unsafe_allow_html=True)
 #joint plot-------------------
 st.markdown("<h2 id='jointplot'>🌐 Joint Plot</h2>", unsafe_allow_html=True)
 import matplotlib.pyplot as plt
@@ -3319,7 +3334,7 @@ st.subheader("✨ Short Definition")
 st.markdown("""
 Matrix plot displays pairwise relationships and distributions of multiple variables in a grid format.
 """)
-
+st.markdown("<a id='heatmap'></a>", unsafe_allow_html=True)
 #==============heatmap===========
 st.markdown("<h2 id='heatmap'>🔥 Heatmap</h2>", unsafe_allow_html=True)
 
@@ -3485,7 +3500,7 @@ st.markdown("""
 ✔ Used in EDA and ML  
 ✔ Customizable with cmap, annot, linewidths  
 """)
-
+st.markdown("<a id='cluster'></a>", unsafe_allow_html=True)
 #clusterheatmap
 st.markdown("<h2 id='cluster'>🔥 Clustermap</h2>", unsafe_allow_html=True)
 import numpy as np
@@ -3646,7 +3661,7 @@ st.markdown("""
 
 
 #style==============
-
+st.markdown("<a id='style'></a>", unsafe_allow_html=True)
 st.set_page_config(page_title="Seaborn Styles & Themes", layout="wide")
 
 # Title
@@ -3803,83 +3818,52 @@ st.markdown("""
 ✔ Used in reports & presentations  
 """)
 
-#dash board
+st.markdown("<a id='practice'></a>", unsafe_allow_html=True)
+st.markdown('<h2 style="color:cyan;">Practice Ouestion</h2>', unsafe_allow_html=True)
+st.markdown("[Kaggle plateform](https://www.kaggle.com/work/code)")
 
-import streamlit as st
-import seaborn as sns
-import matplotlib.pyplot as plt
-import pandas as pd
 
-st.set_page_config(page_title="Canvas Dashboard", layout="wide")
+st.markdown("<a id='about'></a>", unsafe_allow_html=True)
+st.markdown("<a id='about'></a>",unsafe_allow_html=True)
+st.markdown("---")
 
-# ---------------- TITLE ----------------
-st.markdown("<h2 style='text-align:center; color:cyan;'>📊 RESTAURANT ANALYTICS DASHBOARD</h2>", unsafe_allow_html=True)
-
-# ---------------- LOAD DATA ----------------
-df = sns.load_dataset("tips")
-
-# ---------------- SIDEBAR FILTERS ----------------
-st.sidebar.markdown("## 🔎 Filters")
-
-day_filter = st.sidebar.multiselect("Select Day", df["day"].unique(), default=df["day"].unique())
-sex_filter = st.sidebar.multiselect("Select Gender", df["sex"].unique(), default=df["sex"].unique())
-time_filter = st.sidebar.multiselect("Select Time", df["time"].unique(), default=df["time"].unique())
-
-filtered_df = df[
-    (df["day"].isin(day_filter)) &
-    (df["sex"].isin(sex_filter)) &
-    (df["time"].isin(time_filter))
-]
-
-# ---------------- KPI CARDS (TOP ROW) ----------------
-st.markdown("<h3 style='color:yellow;'>📌 Key Metrics</h3>", unsafe_allow_html=True)
-
-k1, k2, k3 = st.columns(3)
-k1.metric("👥 Total Customers", len(filtered_df))
-k2.metric("💵 Avg Bill", round(filtered_df["total_bill"].mean(),2))
-k3.metric("💰 Avg Tip", round(filtered_df["tip"].mean(),2))
-
-st.divider()
-
-# ---------------- CHART GRID (2x2) ----------------
-c1, c2 = st.columns(2)
-
-with c1:
-    st.markdown("<h4 style='color:lightgreen;'>Average Bill by Day</h4>", unsafe_allow_html=True)
-    fig1, ax1 = plt.subplots()
-    sns.barplot(x="day", y="total_bill", data=filtered_df, palette="coolwarm", ax=ax1)
-    st.pyplot(fig1)
-
-with c2:
-    st.markdown("<h4 style='color:lightgreen;'>Customer Count by Gender</h4>", unsafe_allow_html=True)
-    fig2, ax2 = plt.subplots()
-    sns.countplot(x="sex", data=filtered_df, palette="Set2", ax=ax2)
-    st.pyplot(fig2)
-
-c3, c4 = st.columns(2)
-
-with c3:
-    st.markdown("<h4 style='color:lightgreen;'>Bill vs Tip (Regression)</h4>", unsafe_allow_html=True)
-    fig3, ax3 = plt.subplots()
-    sns.regplot(x="total_bill", y="tip", data=filtered_df, color="purple", ax=ax3)
-    st.pyplot(fig3)
-
-with c4:
-    st.markdown("<h4 style='color:lightgreen;'>Correlation Heatmap</h4>", unsafe_allow_html=True)
-    fig4, ax4 = plt.subplots()
-    sns.heatmap(filtered_df.corr(numeric_only=True), annot=True, cmap="coolwarm", ax=ax4)
-    st.pyplot(fig4)
-
-st.divider()
-
-# ---------------- CONCLUSION ----------------
-st.markdown("<h2 style='color:pink;'>📊 Final Conclusion</h2>", unsafe_allow_html=True)
 st.markdown("""
-✔ Weekend days generate higher revenue  
-✔ Tip increases with total bill  
-✔ Male and Female customer distribution is visible  
-✔ Strong correlation between bill and tip  
-✔ Filters allow interactive exploration  
+<div style="
+background-color:#0e1117;
+padding:25px;
+border-radius:15px;
+color:white;
+text-align:center;
+">
 
-🎯 This dashboard helps restaurant owners take better business decisions.
-""")
+<img src="https://www.python.org/static/community_logos/python-logo.png" width="120">
+
+<h2>👩‍💻 Author: Sanya Katiyar</h2>
+
+<p>Python & Data Science Learner 🚀 <br>
+This application is built using <b>Streamlit</b>.</p>
+
+<h4>🎓 Guided by: Dr Aditya Khamparia Sir</h4>
+<p>(Project idea given by my respected teacher)</p>
+
+<hr style="border:1px solid gray;">
+
+<h3>📞 Contact Me</h3>
+
+<p>
+<a href="https://www.linkedin.com/feed/">🔗 LinkedIn</a> | 
+<a href="https://github.com/Sanya-Katiyar-Eng" target="_blank">💻 GitHub</a> | 
+<a href="https://www.youtube.com/" target="_blank">▶️ YouTube</a>
+</p>
+
+<p>📱 Phone: +91-7905639342</p>
+<p>📧 Email:sanyakatiyar01@gmail.com</p>
+
+<hr style="border:1px solid gray;">
+
+<p style="color:lightgray;">© 2026 Sanya Katiyar | All Rights Reserved</p>
+
+</div>
+""", unsafe_allow_html=True)
+
+
