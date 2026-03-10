@@ -729,9 +729,770 @@ st.write("max :", max(m))
 st.write("list :", list(m))
 st.write("'english' in m :", 'english' in m)
 #lopping.........................
-st.markdown('<h3 style=" color:yellow;text-align: center; ">Looping</h3>', unsafe_allow_html=True)
-st.code("""for i in m:
-        print(i)""")
+st.markdown('<h3 style=" color:yellow;text-align: center; ">Looping in Series</h3>', unsafe_allow_html=True)
+
+st.text("Looping allows us to iterate through each value of the Series one by one.")
+
+st.code("""
+import pandas as pd
+
+m = pd.Series({'math':67,'english':57,'science':89,'hindi':100})
+
+for i in m:
+    print(i)
+""")
+
+if st.button("Run Loop", key="loop1"):
+
+    import pandas as pd
+
+    m = pd.Series({'math':67,'english':57,'science':89,'hindi':100})
+
+    st.subheader("Output")
+
+    for i in m:
+        st.write(i)
+
+st.markdown('<h3 style=" color:yellow;text-align: center; ">Operators on Series</h3>', unsafe_allow_html=True)
+
+st.text("Operators can be applied directly on Pandas Series. The operation will be applied to each element of the Series.")
+
+st.code("""
+import pandas as pd
+
+s = pd.Series([10,20,30,40])
+
+print(s + 5)
+print(s * 2)
+print(s > 20)
+""")
+
+if st.button("Run Operators", key="op1"):
+
+    import pandas as pd
+
+    s = pd.Series([10,20,30,40])
+
+    st.subheader("Addition (+5)")
+    st.write(s + 5)
+
+    st.subheader("Multiplication (*2)")
+    st.write(s * 2)
+
+    st.subheader("Comparison (>20)")
+    st.write(s > 20)
+    st.markdown('<h4 style="color:pink;">Arithmetic Operators</h4>', unsafe_allow_html=True)
+
+st.code("""
+s1 = pd.Series([10,20,30])
+s2 = pd.Series([1,2,3])
+
+print(s1 + s2)
+print(s1 - s2)
+print(s1 * s2)
+""")
+
+if st.button("Run Arithmetic", key="op2"):
+
+    s1 = pd.Series([10,20,30])
+    s2 = pd.Series([1,2,3])
+
+    st.write("Addition")
+    st.write(s1 + s2)
+
+    st.write("Subtraction")
+    st.write(s1 - s2)
+
+    st.write("Multiplication")
+    st.write(s1 * s2)
+st.markdown('<h4 style="color:pink;">Boolean Operators</h4>', unsafe_allow_html=True)
+
+st.code("""
+s = pd.Series([10,25,30,15,40])
+
+s > 20
+""")
+
+if st.button("Run Boolean", key="op3"):
+
+    s = pd.Series([10,25,30,15,40])
+
+    st.write("Values greater than 20")
+    st.write(s > 20)
+    st.markdown('<h3 style=" color:yellow;text-align: center; ">Relational Operators in Series</h3>', unsafe_allow_html=True)
+
+st.code("""
+import pandas as pd
+
+s = pd.Series([10, 20, 30, 40, 50])
+s
+""")
+
+s = pd.Series([10,20,30,40,50])
+
+st.subheader("Original Series")
+st.write(s)
+
+# Greater than
+st.markdown('<h4 style="color:pink;">Greater Than (>)</h4>', unsafe_allow_html=True)
+
+st.code("s > 25")
+
+if st.button("Run >", key="gt"):
+    st.write(s > 25)
+
+# Less than
+st.markdown('<h4 style="color:pink;">Less Than (<)</h4>', unsafe_allow_html=True)
+
+st.code("s < 30")
+
+if st.button("Run <", key="lt"):
+    st.write(s < 30)
+
+# Greater equal
+st.markdown('<h4 style="color:pink;">Greater Than Equal (>=)</h4>', unsafe_allow_html=True)
+
+st.code("s >= 30")
+
+if st.button("Run >=", key="gte"):
+    st.write(s >= 30)
+
+# Less equal
+st.markdown('<h4 style="color:pink;">Less Than Equal (<=)</h4>', unsafe_allow_html=True)
+
+st.code("s <= 20")
+
+if st.button("Run <=", key="lte"):
+    st.write(s <= 20)
+
+# Equal
+st.markdown('<h4 style="color:pink;">Equal To (==)</h4>', unsafe_allow_html=True)
+
+st.code("s == 30")
+
+if st.button("Run ==", key="eq"):
+    st.write(s == 30)
+
+# Not equal
+st.markdown('<h4 style="color:pink;">Not Equal To (!=)</h4>', unsafe_allow_html=True)
+
+st.code("s != 30")
+
+if st.button("Run !=", key="neq"):
+    st.write(s != 30)
+
+st.markdown('<h3 style=" color:yellow;text-align: center; ">Series Plotting Graphs</h3>', unsafe_allow_html=True)
+
+st.text("Pandas Series provides built-in plotting methods using Matplotlib.")
+
+st.code("""
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = [10,20,15,30,25]
+s = pd.Series(data)
+
+s.plot()
+plt.show()
+""")
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = [10,20,15,30,25]
+s = pd.Series(data)
+
+st.subheader("Series Data")
+st.write(s)
+st.markdown('<h4 style="color:pink;">Line Plot</h4>', unsafe_allow_html=True)
+
+st.code("""
+s.plot(kind="line")
+plt.show()
+""")
+
+if st.button("Run Line Plot"):
+    
+    fig, ax = plt.subplots()
+    s.plot(kind="line", ax=ax)
+    
+    st.pyplot(fig)
+st.markdown('<h4 style="color:pink;">Bar Plot</h4>', unsafe_allow_html=True)
+
+st.code("""
+s.plot(kind="bar")
+plt.show()
+""")
+
+if st.button("Run Bar Plot"):
+    
+    fig, ax = plt.subplots()
+    s.plot(kind="bar", ax=ax)
+    
+    st.pyplot(fig)
+st.markdown('<h4 style="color:pink;">Horizontal Bar Plot</h4>', unsafe_allow_html=True)
+
+st.code("""
+s.plot(kind="barh")
+plt.show()
+""")
+
+if st.button("Run Barh Plot"):
+    
+    fig, ax = plt.subplots()
+    s.plot(kind="barh", ax=ax)
+    
+    st.pyplot(fig)
+
+st.markdown('<h4 style="color:pink;">Pie Chart</h4>', unsafe_allow_html=True)
+
+st.code("""
+s.plot(kind="pie")
+plt.show()
+""")
+
+if st.button("Run Pie Chart"):
+    
+    fig, ax = plt.subplots()
+    s.plot(kind="pie", autopct='%1.1f%%', ax=ax)
+    
+    st.pyplot(fig)
+st.markdown('<h4 style="color:pink;">Histogram</h4>', unsafe_allow_html=True)
+
+st.code("""
+s.plot(kind="hist")
+plt.show()
+""")
+
+if st.button("Run Histogram"):
+    
+    fig, ax = plt.subplots()
+    s.plot(kind="hist", ax=ax)
+    
+    st.pyplot(fig)
+st.markdown('<h4 style="color:pink;">KDE Plot</h4>', unsafe_allow_html=True)
+
+st.code("""
+s.plot(kind="kde")
+plt.show()
+""")
+
+if st.button("Run KDE Plot"):
+    
+    fig, ax = plt.subplots()
+    s.plot(kind="kde", ax=ax)
+    
+    st.pyplot(fig)
+st.markdown('<h4 style="color:pink;">Box Plot</h4>', unsafe_allow_html=True)
+
+st.code("""
+s.plot(kind="box")
+plt.show()
+""")
+
+if st.button("Run Box Plot"):
+    
+    fig, ax = plt.subplots()
+    s.plot(kind="box", ax=ax)
+    
+    st.pyplot(fig)
+
+
+
+
+
+st.markdown('<h3 style=" color:yellow;text-align: center; ">Important Series Methods</h3>', unsafe_allow_html=True)
+
+data = [10,20,np.nan,40,50,20]
+s = pd.Series(data)
+
+st.subheader("Original Series")
+st.write(s)
+st.markdown('<h4 style="color:pink;">astype()</h4>', unsafe_allow_html=True)
+
+st.text("astype() is used to change the datatype of a Series.")
+
+st.code("""
+s.astype('float')
+""")
+
+if st.button("Run astype()",key="astype"):
+    
+    st.write(s.astype('float'))
+st.markdown('<h4 style="color:pink;">between()</h4>', unsafe_allow_html=True)
+
+st.text("between() checks whether values fall within a given range.")
+
+st.code("""
+s.between(15,45)
+""")
+
+if st.button("Run between()",key="between"):
+    
+    st.write(s.between(15,45))
+st.markdown('<h4 style="color:pink;">clip()</h4>', unsafe_allow_html=True)
+
+st.text("clip() limits the values within a minimum and maximum range.")
+
+st.code("""
+s.clip(20,40)
+""")
+
+if st.button("Run clip()",key="clip"):
+    
+    st.write(s.clip(20,40))
+st.markdown('<h4 style="color:pink;">drop_duplicates()</h4>', unsafe_allow_html=True)
+
+st.text("drop_duplicates() removes duplicate values from the Series.")
+
+st.code("""
+s.drop_duplicates()
+""")
+
+if st.button("Run drop_duplicates()",key="dropdup"):
+    
+    st.write(s.drop_duplicates())
+st.markdown('<h4 style="color:pink;">isnull()</h4>', unsafe_allow_html=True)
+
+st.text("isnull() checks missing values in the Series.")
+
+st.code("""
+s.isnull()
+""")
+
+if st.button("Run isnull()",key="null"):
+    
+    st.write(s.isnull())
+st.markdown('<h4 style="color:pink;">fillna()</h4>', unsafe_allow_html=True)
+
+st.text("fillna() replaces missing values with a specified value.")
+
+st.code("""
+s.fillna(0)
+""")
+
+if st.button("Run fillna()",key="fill"):
+    
+    st.write(s.fillna(0))
+st.markdown('<h4 style="color:pink;">dropna()</h4>', unsafe_allow_html=True)
+
+st.text("dropna() removes missing values from the Series.")
+
+st.code("""
+s.dropna()
+""")
+
+if st.button("Run dropna()",key="dropna"):
+    
+    st.write(s.dropna())
+st.markdown('<h4 style="color:pink;">isin()</h4>', unsafe_allow_html=True)
+
+st.text("isin() checks whether values exist in a given list.")
+
+st.code("""
+s.isin([20,50])
+""")
+
+if st.button("Run isin()",key="isin"):
+    
+    st.write(s.isin([20,50]))
+st.markdown('<h4 style="color:pink;">apply()</h4>', unsafe_allow_html=True)
+
+st.text("apply() applies a function to each element of the Series.")
+
+st.code("""
+s.apply(lambda x: x*2)
+""")
+
+if st.button("Run apply()",key="apply"):
+    
+    st.write(s.apply(lambda x: x*2))
+st.markdown('<h4 style="color:pink;">copy()</h4>', unsafe_allow_html=True)
+
+st.text("copy() creates a separate copy of the Series.")
+
+st.code("""
+new_series = s.copy()
+new_series
+""")
+
+if st.button("Run copy()",key="copy"):
+    
+    new_series = s.copy()
+    st.write(new_series)
+#...........................................................
+st.markdown('<h3 style=" color:yellow;text-align: center; ">Creating DataFrame</h3>', unsafe_allow_html=True)
+st.markdown('<h4 style="color:pink;">DataFrame from Dictionary</h4>', unsafe_allow_html=True)
+
+st.text("A DataFrame can be created from a dictionary where keys become column names.")
+
+st.code("""
+import pandas as pd
+
+data = {
+"Name":["Ram","Shyam","Mohan"],
+"Marks":[85,90,88]
+}
+
+df = pd.DataFrame(data)
+""")
+
+if st.button("Run Dictionary",key="dict"):
+    
+    data = {
+    "Name":["Ram","Shyam","Mohan"],
+    "Marks":[85,90,88]
+    }
+
+    df = pd.DataFrame(data)
+
+    st.write(df)
+st.markdown('<h4 style="color:pink;">DataFrame from List</h4>', unsafe_allow_html=True)
+
+st.text("A DataFrame can be created from a list.")
+
+st.code("""
+data=[10,20,30,40]
+df=pd.DataFrame(data)
+""")
+
+if st.button("Run List",key="listdf"):
+    
+    data=[10,20,30,40]
+
+    df=pd.DataFrame(data)
+
+    st.write(df)
+st.markdown('<h4 style="color:pink;">DataFrame from List of Lists</h4>', unsafe_allow_html=True)
+
+st.code("""
+data=[
+["Ram",85],
+["Shyam",90],
+["Mohan",88]
+]
+
+df=pd.DataFrame(data,columns=["Name","Marks"])
+""")
+
+if st.button("Run List of Lists",key="listlist"):
+    
+    data=[
+    ["Ram",85],
+    ["Shyam",90],
+    ["Mohan",88]
+    ]
+
+    df=pd.DataFrame(data,columns=["Name","Marks"])
+
+    st.write(df)
+st.markdown('<h4 style="color:pink;">DataFrame from Numpy Array</h4>', unsafe_allow_html=True)
+
+st.code("""
+import numpy as np
+
+data=np.array([[1,2,3],[4,5,6]])
+
+df=pd.DataFrame(data)
+""")
+
+if st.button("Run Numpy",key="numpy"):
+    
+    import numpy as np
+
+    data=np.array([[1,2,3],[4,5,6]])
+
+    df=pd.DataFrame(data)
+
+    st.write(df)
+st.markdown('<h4 style="color:pink;">Dictionary of Lists</h4>', unsafe_allow_html=True)
+
+st.code("""
+data={
+"Name":["A","B","C"],
+"Age":[20,21,22]
+}
+
+df=pd.DataFrame(data)
+""")
+
+if st.button("Run Dict List",key="dictlist"):
+    
+    data={
+    "Name":["A","B","C"],
+    "Age":[20,21,22]
+    }
+
+    df=pd.DataFrame(data)
+
+    st.write(df)
+st.markdown('<h4 style="color:pink;">DataFrame from Series</h4>', unsafe_allow_html=True)
+
+st.code("""
+s=pd.Series([10,20,30])
+df=pd.DataFrame(s)
+""")
+
+if st.button("Run Series",key="series"):
+    
+    s=pd.Series([10,20,30])
+
+    df=pd.DataFrame(s)
+
+    st.write(df)
+st.markdown('<h4 style="color:pink;">DataFrame from CSV</h4>', unsafe_allow_html=True)
+
+st.text("DataFrame can be created by reading CSV files.")
+
+st.code("""
+df=pd.read_csv("data.csv")
+""")
+st.markdown('<h4 style="color:pink;">DataFrame from Excel</h4>', unsafe_allow_html=True)
+
+st.code("""
+df=pd.read_excel("data.xlsx")
+""")
+import streamlit as st
+import pandas as pd
+import numpy as np
+#.........................................................
+st.markdown('<h3 style="color:yellow;text-align:center;">DataFrame Attributes & Methods</h3>', unsafe_allow_html=True)
+
+# Sample DataFrame
+st.code("""df = pd.DataFrame({
+    "Name":["Ram","Shyam","Mohan","Ravi","Ram"],
+    "Age":[20,21,22,np.nan,20],
+    "Marks":[85,90,88,76,85]
+})
+    print(df)""")
+df = pd.DataFrame({
+    "Name":["Ram","Shyam","Mohan","Ravi","Ram"],
+    "Age":[20,21,22,np.nan,20],
+    "Marks":[85,90,88,76,85]
+})
+
+st.subheader("Original DataFrame")
+st.write(df)
+
+# ---------------- shape ----------------
+st.markdown("### shape")
+st.code("df.shape")
+
+if st.button("Run shape"):
+    st.write(df.shape)
+
+# ---------------- dtypes ----------------
+st.markdown("### dtypes")
+st.code("df.dtypes")
+
+if st.button("Run dtypes"):
+    st.write(df.dtypes)
+
+# ---------------- index ----------------
+st.markdown("### index")
+st.code("df.index")
+
+if st.button("Run index"):
+    st.write(df.index)
+
+# ---------------- columns ----------------
+st.markdown("### columns")
+st.code("df.columns")
+
+if st.button("Run columns"):
+    st.write(df.columns)
+
+# ---------------- values ----------------
+st.markdown("### values")
+st.code("df.values")
+
+if st.button("Run values"):
+    st.write(df.values)
+
+# ---------------- sample ----------------
+st.markdown("### sample()")
+st.code("df.sample(2)")
+
+if st.button("Run sample"):
+    st.write(df.sample(2))
+
+# ---------------- info ----------------
+st.markdown("### info()")
+st.code("df.info()")
+
+if st.button("Run info"):
+    import io
+    buffer = io.StringIO()
+    df.info(buf=buffer)
+    st.text(buffer.getvalue())
+
+# ---------------- describe ----------------
+st.markdown("### describe()")
+st.code("df.describe()")
+
+if st.button("Run describe"):
+    st.write(df.describe())
+
+# ---------------- isnull ----------------
+st.markdown("### isnull()")
+st.code("df.isnull()")
+
+if st.button("Run isnull"):
+    st.write(df.isnull())
+
+# ---------------- isnull sum ----------------
+st.markdown("### isnull().sum()")
+st.code("df.isnull().sum()")
+
+if st.button("Run isnull sum"):
+    st.write(df.isnull().sum())
+
+# ---------------- duplicates ----------------
+st.markdown("### duplicated().sum()")
+st.code("df.duplicated().sum()")
+
+if st.button("Run duplicated"):
+    st.write(df.duplicated().sum())
+
+# ---------------- rename ----------------
+st.markdown("### rename()")
+st.code("df.rename(columns={'Marks':'Score'})")
+
+if st.button("Run rename"):
+    st.write(df.rename(columns={'Marks':'Score'}))
+
+
+#...................................................
+st.markdown('<h3 style="color:yellow;text-align:center;">DataFrame Mathematical Methods</h3>', unsafe_allow_html=True)
+st.code("""df = pd.DataFrame({
+    "Math":[80,90,70],
+    "English":[85,88,92],
+    "Science":[78,95,89]
+})
+        print(df)""")
+df = pd.DataFrame({
+    "Math":[80,90,70],
+    "English":[85,88,92],
+    "Science":[78,95,89]
+})
+
+st.subheader("Original DataFrame")
+st.write(df)
+st.markdown("### sum()")
+
+st.code("""
+df.sum(axis=0)   # Column wise sum
+df.sum(axis=1)   # Row wise sum
+""")
+
+if st.button("Run sum()"):
+    
+    st.write("Column wise sum (axis=0)")
+    st.write(df.sum(axis=0))
+    
+    st.write("Row wise sum (axis=1)")
+    st.write(df.sum(axis=1))
+
+st.markdown("### mean()")
+
+st.code("""
+df.mean()
+""")
+
+if st.button("Run mean()"):
+    
+    st.write(df.mean())
+st.markdown("### min()")
+
+st.code("""
+df.min()
+""")
+
+if st.button("Run min()"):
+    
+    st.write(df.min())
+st.markdown("### var()")
+
+st.code("""
+df.var()
+""")
+
+if st.button("Run var()"):
+    
+    st.write(df.var())
+#..............................................................
+st.markdown('<h3 style="color:yellow;text-align:center;">Selecting Columns from DataFrame</h3>', unsafe_allow_html=True)
+st.code("""df = pd.DataFrame({
+    "Name":["Ram","Shyam","Mohan","Ravi"],
+    "Age":[20,21,22,23],
+    "Marks":[85,90,88,76],
+    "City":["Kanpur","Delhi","Lucknow","Agra"]
+})
+print(df)""")
+df = pd.DataFrame({
+    "Name":["Ram","Shyam","Mohan","Ravi"],
+    "Age":[20,21,22,23],
+    "Marks":[85,90,88,76],
+    "City":["Kanpur","Delhi","Lucknow","Agra"]
+})
+
+st.subheader("Original DataFrame")
+st.write(df)
+st.markdown("### Selecting Single Column")
+
+st.code("""
+df["Name"]
+""")
+
+if st.button("Run Single Column"):
+    
+    st.write(df["Name"])
+st.markdown("### Selecting Multiple Columns")
+
+st.code("""
+df[["Name","Marks"]]
+""")
+
+if st.button("Run Multiple Columns"):
+    
+    st.write(df[["Name","Marks"]])
+st.markdown("### Selecting Column using Dot Notation")
+
+st.code("""
+df.Name
+""")
+
+if st.button("Run Dot Notation"):
+    
+    st.write(df.Name)
+st.markdown("### Selecting Columns using loc")
+
+st.code("""
+df.loc[:, "Marks"]
+""")
+
+if st.button("Run loc"):
+    
+    st.write(df.loc[:, "Marks"])
+st.markdown("### Selecting Columns using iloc")
+
+st.code("""
+df.iloc[:,2]
+""")
+
+if st.button("Run iloc"):
+    
+    st.write(df.iloc[:,2])
+
+
+
+
+
+
+
+
+
+
 
 
 
