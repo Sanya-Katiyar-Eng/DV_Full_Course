@@ -1,62 +1,160 @@
 import streamlit as st
+import numpy as np
 import pandas as pd
 import time
+
 st.set_page_config(page_title="StudyNest", layout="wide")
 
-# ---------------- BACK BUTTON ----------------
-if st.button("⬅ Back to Home"):
-    st.switch_page("main.py")
+# ---------------- THEME INITIALIZE ----------------
+if "theme" not in st.session_state:
+    st.session_state.theme = "dark"
 
+# ---------------- THEME BUTTON ----------------
+col1, col2 = st.columns([9,1])
+
+with col2:
+    if st.button("🌙 / ☀"):
+        if st.session_state.theme == "dark":
+            st.session_state.theme = "light"
+        else:
+            st.session_state.theme = "dark"
 # ---------------- CSS STYLE ----------------
+if st.session_state.theme == "dark":
+
+    st.markdown("""
+    <style>
+
+    /* APP BACKGROUND */
+    .stApp{
+        background-color:#0f172a;
+        color:#e2e8f0;
+    }
+
+    /* HEADINGS */
+    h1,h2,h3,h4,h5,h6{
+        color:#f8fafc;
+    }
+
+    /* NORMAL TEXT */
+    p, span, label, div{
+        color:#e2e8f0 !important;
+    }
+
+    /* CODE BLOCK */
+    pre{
+        background-color:#020617 !important;
+        color:#38bdf8 !important;
+        border-radius:8px;
+    }
+
+    /* BUTTON */
+    div.stButton > button{
+        background-color:#2563eb;
+        color:white;
+        border-radius:8px;
+        border:none;
+        padding:8px 16px;
+    }
+
+    div.stButton > button:hover{
+        background-color:#1d4ed8;
+        color:white;
+    }
+
+    /* EXPANDER */
+    .streamlit-expanderHeader{
+        background-color:#020617;
+        color:#e2e8f0;
+        border-radius:6px;
+    }
+
+    /* SIDEBAR */
+    section[data-testid="stSidebar"]{
+        background-color:#020617;
+    }
+
+    /* LINKS */
+    a{
+        color:#38bdf8;
+    }
+
+    </style>
+    """, unsafe_allow_html=True)
+
+else:
+
+    st.markdown("""
+    <style>
+
+    /* APP BACKGROUND */
+    .stApp{
+        background-color:#ffffff;
+        color:#1e293b;
+    }
+
+    /* HEADINGS */
+    h1,h2,h3,h4,h5,h6{
+        color:#0f172a;
+    }
+
+    /* NORMAL TEXT */
+    p, span, label, div{
+        color:#1e293b !important;
+    }
+
+    /* CODE BLOCK */
+    pre{
+        background-color:#f1f5f9 !important;
+        color:#0f172a !important;
+        border-radius:8px;
+    }
+
+    /* BUTTON */
+    div.stButton > button{
+        background-color:#2563eb;
+        color:white;
+        border-radius:8px;
+        border:none;
+        padding:8px 16px;
+    }
+
+    div.stButton > button:hover{
+        background-color:#1d4ed8;
+        color:white;
+    }
+
+    /* EXPANDER */
+    .streamlit-expanderHeader{
+        background-color:#f1f5f9;
+        color:#0f172a;
+        border-radius:6px;
+    }
+
+    /* SIDEBAR */
+    section[data-testid="stSidebar"]{
+        background-color:#f8fafc;
+    }
+
+    /* LINKS */
+    a{
+        color:#2563eb;
+    }
+
+    </style>
+    """, unsafe_allow_html=True)
+
+
+    
+
+
+# ---------------- TITLE ----------------
+st.markdown("<h1 style='text-align:center;'>Welcome to StudyNest</h1>", unsafe_allow_html=True)
+
 st.markdown("""
-<style>
-
-/* 🌑 Professional Dark Background */
-.stApp {
-    background-color: #0f172a;   /* Deep Navy Professional Color */
-}
-
-/* ✨ Title */
-.fade-text {
-    text-align: center;
-    font-size: 48px;
-    color: #FFD700;
-    animation: fadeIn 2s ease-in;
-    margin-top: 40px;
-}
-
-/* Subtitle */
-.subtitle {
-    text-align: center;
-    font-size: 22px;
-    color: #e5e7eb;
-    margin-bottom: 40px;
-}
-
-/* Fade animation */
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(20px);}
-    to {opacity: 1; transform: translateY(0);}
-}
-
-/* Banner */
-.top-banner {
-    background: #FFD700;
-    padding: 12px;
-    text-align: center;
-    color: black;
-    font-size: 22px;
-    font-weight: bold;
-    border-radius: 8px;
-    margin-top: 20px;
-}
-
-</style>
+<p class="subtitle">
+Learn • Practice • Grow with Interactive Notes
+</p>
 """, unsafe_allow_html=True)
-
-# ---------------- TEXT ----------------
-st.markdown('<h1 class="fade-text">Welcome to StudyNest</h1>', unsafe_allow_html=True)
-st.markdown('<p class="subtitle">Learn • Practice • Grow with Interactive Notes</p>', unsafe_allow_html=True)
 
 # ---------------- BANNER ----------------
 st.markdown("""
@@ -65,12 +163,20 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+st.write("")
 
+# ---------------- MAIN HEADING ----------------
+st.markdown("""
+<h2 style='text-align:center;'>
+Learn Data Visualization Step by Step
+</h2>
+""", unsafe_allow_html=True)
 
 st.markdown("""
-    <h2 style="color:white;">Welcome : Learn Data Visualization Step by Step</h2>
+<h5 style='text-align:center;color:green;'>
+Transform raw data into meaningful insights through visualization.
+</h5>
 """, unsafe_allow_html=True)
-st.markdown("<h5 style='color:red;'>Transform raw data into meaningful insights through visualization.</h5>",unsafe_allow_html=True)
 
 #Use of side bar ...........................................................................
 st.sidebar.title("Go to Topics")
@@ -88,8 +194,8 @@ st.sidebar.markdown("""
 - [About Author](#about)
 """, unsafe_allow_html=True)
 
-
-st.markdown("<h3 id='introduction' style='text-align:left; color:yellow;'>Introduction</h3>", unsafe_allow_html=True)
+st.markdown("<h2 id='introduction' style='text-align:center;'>Python</h2>", unsafe_allow_html=True)
+st.markdown("<h4 id='introduction' style='text-align:left;'>Introduction</h4>", unsafe_allow_html=True)
 
 st.text(
         "Python is a high-level, easy-to-learn programming language.\n"
@@ -146,7 +252,7 @@ st.text("""Once you have Python installed, you can run the program by following 
 3.Save the file with .py extension (e.g., Hello.py).
 3.Open the terminal.
 4.Run the program by pressing Enter.""")
-st.markdown("<h8 style='text-align : left;color : yellow;'>program</h8>",unsafe_allow_html=True)
+st.markdown("<h6 style='text-align : left;'>program</h6>",unsafe_allow_html=True)
 st.code("""
     print("Hello")
     """, language="python")
@@ -160,7 +266,7 @@ with st.expander("About Variables"):
     st.text("""In Python, variables are containers, which is used to store data values. Python supports various datatypes, including integers, floats, strings, and booleans. It represents the kind of value that tells what operations can be performed on a particular data. 
 
 Variables are created when we assign a value to them, using the assignment operator (=).""")
-st.markdown("<h8 style='text-align : left;color : yellow;'>program</h8>",unsafe_allow_html=True)
+st.markdown("<h6 style='text-align : left;'>program</h6>",unsafe_allow_html=True)
 st.code("""Var = "Geeksforgeeks"
 print(Var)""",language="python")
 
@@ -538,7 +644,7 @@ print(str(123) + " is a number")  # "123 is a number"
 # List to tuple
 print(tuple([1, 2, 3]))  # (1, 2, 3)""")
 
-st.text("""✅ Key Points:
+st.text(""" Key Points:
 
 Implicit casting is safe and automatic.
 Explicit casting must be done carefully to avoid ValueError (e.g., int("abc") will fail).
@@ -565,29 +671,28 @@ st.markdown("[Click here for Practice  Conditional Statements and Loops  📘](h
 st.markdown("<a id='load'></a>",unsafe_allow_html=True)
 
 st.markdown("<a id='load'></a>", unsafe_allow_html=True)
-st.markdown("## 📚 Learning Dashboard")
-st.markdown("Click on any button to visit that topic page 👇")
+st.markdown("##  Learning Dashboard")
+st.markdown("Click on any button to visit that topic page ")
 st.markdown("---")
 
 # -------------------
 # Python Basics
 # -------------------
-st.markdown("### 🐍 Python Basics")
+st.markdown("###  Python Basics")
 st.markdown("Explore the core Python data types and methods:")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    if st.button("🐍 Strings", use_container_width=True):
-        st.balloons()
+    if st.button(" Strings", use_container_width=True):
         st.switch_page("pages/String.py")
-    if st.button("🧵 Method", use_container_width=True):
+    if st.button(" Method", use_container_width=True):
         st.switch_page("pages/Methods.py")
-    if st.button("📦 Tuple", use_container_width=True):
+    if st.button(" Tuple", use_container_width=True):
         st.switch_page("pages/Tuple.py")
-    if st.button("🧺 Set", use_container_width=True):
+    if st.button(" Set", use_container_width=True):
         st.switch_page("pages/Set.py")
-    if st.button("📖 Dictionary", use_container_width=True):
+    if st.button(" Dictionary", use_container_width=True):
         st.switch_page("pages/Dict.py")
 
 # -------------------
@@ -595,7 +700,7 @@ with col1:
 # -------------------
 st.markdown("<a id='intro'></a>",unsafe_allow_html=True)
 st.markdown("---")
-st.markdown("### 📊 Data Visualization")
+st.markdown("###  Data Visualization")
 st.markdown(
     """
 **Data Visualization?**  
@@ -642,7 +747,7 @@ with st.expander("Tools and Technologies :"):
 # -----------------------------
 # Challenges Section
 # -----------------------------
-with st.expander("📌 Challenges of Data Visualization"):
+with st.expander(" Challenges of Data Visualization"):
     st.subheader("1. Misinterpretation")
     st.write("Incorrect visualizations may lead to misinterpretation of data.")
     st.write("**Example:** Choosing a misleading scale on a bar chart, making differences appear larger than they are.")
@@ -654,7 +759,7 @@ with st.expander("📌 Challenges of Data Visualization"):
 # -----------------------------
 # Examples of Data Visualization
 # -----------------------------
-with st.expander("📈 Examples of Data Visualization"):
+with st.expander(" Examples of Data Visualization"):
 
     # Bar Chart Example
     st.subheader("Bar Chart")
@@ -700,7 +805,7 @@ with st.expander("📈 Examples of Data Visualization"):
 # -----------------------------
 # Applications Section
 # -----------------------------
-with st.expander("💼 Applications of Data Visualization"):
+with st.expander(" Applications of Data Visualization"):
 
     st.subheader("Business and Finance")
     st.write("""
@@ -726,7 +831,7 @@ with st.expander("💼 Applications of Data Visualization"):
 # -----------------------------
 # Process of Data Visualization
 # -----------------------------
-with st.expander("🛠 Process of Data Visualization"):
+with st.expander(" Process of Data Visualization"):
     st.subheader("1. Data Collection")
     st.write("Gather relevant data from various sources (databases, surveys, APIs) and ensure accuracy and completeness.")
     
@@ -756,15 +861,15 @@ st.markdown("Click on any library to explore its functionalities:")
 col3, col4 = st.columns(2)
 
 with col3:
-    if st.button("🐼 Pandas", use_container_width=True):
+    if st.button(" Pandas", use_container_width=True):
         st.switch_page("pages/Pandas.py")
-    if st.button("🧺 Numpy", use_container_width=True):
+    if st.button("Numpy", use_container_width=True):
         st.switch_page("pages/Numpy.py")
 
 with col4:
-    if st.button("📊 Matplotlib", use_container_width=True):
+    if st.button(" Matplotlib", use_container_width=True):
         st.switch_page("pages/Matplotlib.py")
-    if st.button("📊 Seaborn", use_container_width=True):
+    if st.button(" Seaborn", use_container_width=True):
         st.switch_page("pages/Seaborn.py")
     
 
@@ -788,26 +893,26 @@ text-align:center;
 
 <img src="https://www.python.org/static/community_logos/python-logo.png" width="120">
 
-<h2>👩‍💻 Author: Sanya Katiyar</h2>
+<h2> Author: Sanya Katiyar</h2>
 
-<p>Python & Data Science Learner 🚀 <br>
+<p>Python & Data Science Learner  <br>
 This application is built using <b>Streamlit</b>.</p>
 
-<h4>🎓 Guided by: Dr Aditya Khamparia Sir</h4>
+<h4> Guided by: Dr Aditya Khamparia Sir</h4>
 <p>(Project idea given by my respected teacher)</p>
 
 <hr style="border:1px solid gray;">
 
-<h3>📞 Contact Me</h3>
+<h3> Contact Me</h3>
 
 <p>
-<a href="https://www.linkedin.com/feed/">🔗 LinkedIn</a> | 
-<a href="https://github.com/Sanya-Katiyar-Eng" target="_blank">💻 GitHub</a> | 
-<a href="https://www.youtube.com/" target="_blank">▶️ YouTube</a>
+<a href="https://www.linkedin.com/feed/"> LinkedIn</a> | 
+<a href="https://github.com/Sanya-Katiyar-Eng" target="_blank"> GitHub</a> | 
+<a href="https://www.youtube.com/" target="_blank">▶ YouTube</a>
 </p>
 
-<p>📱 Phone: +91-7905639342</p>
-<p>📧 Email:sanyakatiyar01@gmail.com</p>
+<p> Phone: +91-7905639342</p>
+<p> Email:sanyakatiyar01@gmail.com</p>
 
 <hr style="border:1px solid gray;">
 
