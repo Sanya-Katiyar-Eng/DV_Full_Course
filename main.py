@@ -68,11 +68,7 @@ st.markdown("""
 
 
 st.markdown("""
-<div style="display:flex; align-items:center; gap:15px;">
-    <img src="https://www.bing.com/th/id/OIP.S3S79Rl6tIPDEfbLB4w92wHaHa?w=224&h=211&c=8&rs=1&qlt=90&o=6&cb=defcachec1&pid=3.1&rm=2"
-         width="100">
     <h2 style="color:white;">Welcome : Learn Data Visualization Step by Step</h2>
-</div>
 """, unsafe_allow_html=True)
 st.markdown("<h5 style='color:red;'>Transform raw data into meaningful insights through visualization.</h5>",unsafe_allow_html=True)
 
