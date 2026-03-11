@@ -1,60 +1,184 @@
 import streamlit as st
+import pandas as pd
+import time
+import matplotlib.pyplot as plt
+import numpy as np
 st.set_page_config(page_title="StudyNest", layout="wide")
+
+# ---------------- THEME INITIALIZE ----------------
+if "theme" not in st.session_state:
+    st.session_state.theme = "dark"
+
+# ---------------- THEME BUTTON ----------------
+col1, col2 = st.columns([9,1])
+
+with col2:
+    if st.button("light / dark"):
+        if st.session_state.theme == "dark":
+            st.session_state.theme = "light"
+        else:
+            st.session_state.theme = "dark"
+        st.rerun()
 
 # ---------------- BACK BUTTON ----------------
 if st.button("⬅ Back to Home"):
     st.switch_page("main.py")
 
-# ---------------- CSS STYLE ----------------
-st.markdown("""
-<style>
 
-/* 🌑 Professional Dark Background */
-.stApp {
-    background-color: #0f172a;   /* Deep Navy Professional Color */
+# ---------------- DARK MODE CSS ----------------
+if st.session_state.theme == "dark":
+
+    st.markdown("""
+    <style>
+
+    .stApp {
+        background-color: #0f172a;
+    }
+
+    .fade-text {
+        text-align: center;
+        font-size: 48px;
+        color: #FFD700;
+        animation: fadeIn 2s ease-in;
+        margin-top: 40px;
+    }
+
+    .subtitle {
+        text-align: center;
+        font-size: 22px;
+        color: #e5e7eb;
+        margin-bottom: 40px;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    .top-banner {
+        background: #FFD700;
+        padding: 12px;
+        text-align: center;
+        color: black;
+        font-size: 22px;
+        font-weight: bold;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+
+    </style>
+    """, unsafe_allow_html=True)
+
+
+# ---------------- LIGHT MODE CSS ----------------
+else:
+
+    st.markdown("""
+    <style>
+
+    .stApp {
+        background-color: white;
+        color: black;
+    }
+
+    .fade-text {
+        text-align: center;
+        font-size: 48px;
+        color: black;
+        animation: fadeIn 2s ease-in;
+        margin-top: 40px;
+    }
+
+    .subtitle {
+        text-align: center;
+        font-size: 22px;
+        color: black;
+        margin-bottom: 40px;
+    }
+
+    .top-banner {
+        background: #FFD700;
+        padding: 12px;
+        text-align: center;
+        color: black;
+        font-size: 22px;
+        font-weight: bold;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+                p, h1, h2, h3, h4, h5, h6, span {
+    color: black !important;
 }
+   /* BUTTON STYLE */
 
-/* ✨ Title */
-.fade-text {
-    text-align: center;
-    font-size: 48px;
-    color: #FFD700;
-    animation: fadeIn 2s ease-in;
-    margin-top: 40px;
-}
-
-/* Subtitle */
-.subtitle {
-    text-align: center;
-    font-size: 22px;
-    color: #e5e7eb;
-    margin-bottom: 40px;
-}
-
-/* Fade animation */
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(20px);}
-    to {opacity: 1; transform: translateY(0);}
-}
-
-/* Banner */
-.top-banner {
-    background: #FFD700;
-    padding: 12px;
-    text-align: center;
-    color: black;
-    font-size: 22px;
-    font-weight: bold;
+div.stButton > button {
+    background-color: #2563eb !important;
+    color: white !important;
     border-radius: 8px;
-    margin-top: 20px;
+    border: none;
+    padding: 8px 18px;
+    font-weight: 600;
 }
 
-</style>
-""", unsafe_allow_html=True)
+/* Hover */
+
+div.stButton > button:hover {
+    background-color: #1d4ed8 !important;
+    color: white !important;
+}
+                
+    /* SIDEBAR LIGHT MODE */
+
+    section[data-testid="stSidebar"]{
+        background-color:#ffffff;
+        color:#0f172a;
+        border-right:1px solid #e5e7eb;
+    }
+
+/* Click (Active) */
+
+div.stButton > button:active {
+    background-color: #2563eb !important;
+    color: white !important;
+}
+
+/* Focus */
+
+div.stButton > button:focus {
+    background-color: #2563eb !important;
+    color: white !important;
+    box-shadow: none !important;
+}             
+                /* CODE BLOCK - st.code */
+
+pre {
+    background-color: #f1f5f9 !important;   /* light background */
+    color: #0f172a !important;              /* dark text */
+    border-radius: 8px;
+    padding: 14px;
+    border: 1px solid #e2e8f0;
+    font-size: 15px;
+}
+
+/* code inside block */
+
+code {
+    color: #0f172a !important;
+}
+
+/* optional line highlight */
+
+.stCodeBlock {
+    background-color: #f8fafc !important;
+}
+    """, unsafe_allow_html=True)
+
 
 # ---------------- TEXT ----------------
 st.markdown('<h1 class="fade-text">Welcome to StudyNest</h1>', unsafe_allow_html=True)
+
 st.markdown('<p class="subtitle">Learn • Practice • Grow with Interactive Notes</p>', unsafe_allow_html=True)
+
 
 # ---------------- BANNER ----------------
 st.markdown("""
@@ -62,6 +186,49 @@ st.markdown("""
 ✨ 📘 Welcome to StudyNest – Your Smart Learning Hub ✨
 </div>
 """, unsafe_allow_html=True)
+
+
+# ---------------- CONTENT ----------------
+
+if st.session_state.theme == "dark":
+
+    st.markdown("""
+    <h2 style="color:white;">Welcome : Learn Data Visualization Step by Step</h2>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <h5 style="color:green;">
+    Transform raw data into meaningful insights through visualization.
+    </h5>
+    """, unsafe_allow_html=True)
+
+else:
+
+    st.markdown("""
+    <h2 style="color:#1e293b;">Welcome : Learn Data Visualization Step by Step</h2>
+    """, unsafe_allow_html=True)
+
+    st.markdown('<h5 style="color:green;">Transform raw data into meaningful insights through visualization.</h5>', unsafe_allow_html=True)
+# ---------------- MAIN HEADING ----------------
+
+
+
+st.markdown("""
+<style>
+
+/* Hide Emojis */
+
+span.emoji {
+    display:none;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+
+
+
+
 
 st.title("Matplotlib")
 st.text("Matplotlib is Python's most popular plotting library for creating static, animated, and interactive visualizations.")
@@ -182,7 +349,7 @@ if st.button("▶️ Run ", key="basic1"):
         ax.set_ylabel("Y-Axis")  
         st.pyplot(fig)
 st.markdown("""
-<h4 style="color:yellow; text-align:center;">📊 Matplotlib Keywords Explanation</h4>
+<h4 style="color:yellow; text-align:center;"> Matplotlib Keywords Explanation</h4>
 <p><b style="color:deeppink;">x , y :</b> values (data points)<br></p>
 <p><b style="color:deeppink;">fig :</b> full graph window (figure)</p>
 <p><b style="color:deeppink;">ax :</b> plotting area (axes)</p>
@@ -239,7 +406,7 @@ Here are some of the most commonly used types of plots in Matplotlib:
 """, unsafe_allow_html=True)
 st.image("https://media.geeksforgeeks.org/wp-content/uploads/20241205132215349786/Screenshot-2024-12-05-131953.png")
 
-with st.expander("📌 Key Features of Matplotlib"):
+with st.expander(" Key Features of Matplotlib"):
     st.markdown("""
 **Versatile Plotting:**  
 Create a wide variety of visualizations, including line plots, scatter plots, bar charts and histograms.
@@ -261,9 +428,8 @@ Engage with your data dynamically through interactive plotting features.
 """)
     
 
-    import streamlit as st
 
-with st.expander("📊 What is Matplotlib Used For?"):
+with st.expander(" What is Matplotlib Used For?"):
     st.markdown("""
 Matplotlib is a Python library for data visualization, primarily used to create static, animated and interactive plots.  
 It provides a wide range of plotting functions to visualize data effectively.
@@ -519,7 +685,6 @@ if st.button("▶️ Run ", key="basic7"):
 st.markdown("<a id='styling'></a>",unsafe_allow_html=True)
 
 
-import streamlit as st
 import matplotlib.pyplot as plt
 import random
 
@@ -707,7 +872,7 @@ import random
 
 # ================= HEADING & THEORY =================
 st.markdown("""
-<h2 style="color:orange; text-align:center;">📈 Line Chart in Matplotlib - Python</h2>
+<h2 style="color:orange; text-align:center;"> Line Chart in Matplotlib - Python</h2>
 
 A line chart (line plot) is used to show the relationship between two continuous variables by connecting data points with straight lines.  
 It helps visualize trends, patterns and changes over time.
@@ -982,13 +1147,11 @@ we can create clear, attractive and informative line charts to analyze trends an
 
 #bar..........
 st.markdown("<a id='bar'></a>", unsafe_allow_html=True)
-import streamlit as st
-import matplotlib.pyplot as plt
-import numpy as np
+
 
 # ================= HEADING & THEORY =================
 st.markdown("""
-<h2 style="color:orange; text-align:center;">📊 Bar Plot in Matplotlib</h2>
+<h2 style="color:orange; text-align:center;"> Bar Plot in Matplotlib</h2>
 
 
 A bar plot uses rectangular bars to represent data categories, with bar length or height proportional to their values.  
@@ -1012,9 +1175,7 @@ It is used to compare discrete categories, where one axis represents categories 
 <h4 style="color:green;">Click the Run buttons to see output</h4>
 """, unsafe_allow_html=True)
 
-#About baar
-import streamlit as st
-import matplotlib.pyplot as plt
+#
 
 # 🌙 Page config
 st.set_page_config(page_title="Bar Plot", layout="centered")
@@ -1048,7 +1209,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # 🟢 Title
-st.markdown('<div class="main-title">📊 Bar Plot (Bar Chart)</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title"> Bar Plot (Bar Chart)</div>', unsafe_allow_html=True)
 
 # 🟡 What is Bar Plot
 st.markdown('<div class="sub-title">What is a Bar Plot?</div>', unsafe_allow_html=True)
@@ -1354,10 +1515,9 @@ if st.button("Show Output - Basic Scatter"):
     st.pyplot(fig)
 
 st.divider()
-import streamlit as st
-import pandas as pd
 
-st.markdown("## 📋 Scatter Plot Parameters")
+
+st.markdown("##  Scatter Plot Parameters")
 
 data = {
     "Parameter": ["x, y", "s", "c", "marker", "cmap", "alpha", "edgecolors", "label"],
@@ -1523,10 +1683,7 @@ if st.button("Show Output - Example 5"):
 
 
 #histogram
-import streamlit as st
-import matplotlib.pyplot as plt
-import numpy as np
-import seaborn as sns
+
 from matplotlib import colors
 st.markdown("<a id='histogram'></a>",unsafe_allow_html=True)
 
@@ -1836,7 +1993,7 @@ import matplotlib.pyplot as plt
 st.set_page_config(page_title="Pie Chart in Matplotlib", layout="wide")
 
 # ---------------- TITLE ----------------
-st.markdown("<h1 style='color:#00BFFF;text-align:center;'>🥧 Pie Chart in Matplotlib</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='color:#00BFFF;text-align:center;'> Pie Chart in Matplotlib</h1>", unsafe_allow_html=True)
 
 # ---------------- THEORY ----------------
 st.markdown("<h2 style='color:#FFD700;'>Why Use Pie Charts?</h2>", unsafe_allow_html=True)

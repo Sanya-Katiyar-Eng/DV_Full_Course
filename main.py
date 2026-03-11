@@ -1,5 +1,4 @@
 import streamlit as st
-import numpy as np
 import pandas as pd
 import time
 
@@ -13,148 +12,172 @@ if "theme" not in st.session_state:
 col1, col2 = st.columns([9,1])
 
 with col2:
-    if st.button("🌙 / ☀"):
+    if st.button("light / dark"):
         if st.session_state.theme == "dark":
             st.session_state.theme = "light"
         else:
             st.session_state.theme = "dark"
-# ---------------- CSS STYLE ----------------
+        st.rerun()
+
+# ---------------- BACK BUTTON ----------------
+if st.button("⬅ Back to Home"):
+    st.switch_page("main.py")
+
+
+# ---------------- DARK MODE CSS ----------------
 if st.session_state.theme == "dark":
 
     st.markdown("""
     <style>
 
-    /* APP BACKGROUND */
-    .stApp{
-        background-color:#0f172a;
-        color:#e2e8f0;
+    .stApp {
+        background-color: #0f172a;
     }
 
-    /* HEADINGS */
-    h1,h2,h3,h4,h5,h6{
-        color:#f8fafc;
+    .fade-text {
+        text-align: center;
+        font-size: 48px;
+        color: #FFD700;
+        animation: fadeIn 2s ease-in;
+        margin-top: 40px;
     }
 
-    /* NORMAL TEXT */
-    p, span, label, div{
-        color:#e2e8f0 !important;
+    .subtitle {
+        text-align: center;
+        font-size: 22px;
+        color: #e5e7eb;
+        margin-bottom: 40px;
     }
 
-    /* CODE BLOCK */
-    pre{
-        background-color:#020617 !important;
-        color:#38bdf8 !important;
-        border-radius:8px;
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(20px);}
+        to {opacity: 1; transform: translateY(0);}
     }
 
-    /* BUTTON */
-    div.stButton > button{
-        background-color:#2563eb;
-        color:white;
-        border-radius:8px;
-        border:none;
-        padding:8px 16px;
-    }
-
-    div.stButton > button:hover{
-        background-color:#1d4ed8;
-        color:white;
-    }
-
-    /* EXPANDER */
-    .streamlit-expanderHeader{
-        background-color:#020617;
-        color:#e2e8f0;
-        border-radius:6px;
-    }
-
-    /* SIDEBAR */
-    section[data-testid="stSidebar"]{
-        background-color:#020617;
-    }
-
-    /* LINKS */
-    a{
-        color:#38bdf8;
+    .top-banner {
+        background: #FFD700;
+        padding: 12px;
+        text-align: center;
+        color: black;
+        font-size: 22px;
+        font-weight: bold;
+        border-radius: 8px;
+        margin-top: 20px;
     }
 
     </style>
     """, unsafe_allow_html=True)
 
+
+# ---------------- LIGHT MODE CSS ----------------
 else:
 
     st.markdown("""
     <style>
 
-    /* APP BACKGROUND */
-    .stApp{
-        background-color:#ffffff;
-        color:#1e293b;
+    .stApp {
+        background-color: white;
+        color: black;
     }
 
-    /* HEADINGS */
-    h1,h2,h3,h4,h5,h6{
-        color:#0f172a;
+    .fade-text {
+        text-align: center;
+        font-size: 48px;
+        color: black;
+        animation: fadeIn 2s ease-in;
+        margin-top: 40px;
     }
 
-    /* NORMAL TEXT */
-    p, span, label, div{
-        color:#1e293b !important;
+    .subtitle {
+        text-align: center;
+        font-size: 22px;
+        color: black;
+        margin-bottom: 40px;
     }
 
-    /* CODE BLOCK */
-    pre{
-        background-color:#f1f5f9 !important;
-        color:#0f172a !important;
-        border-radius:8px;
+    .top-banner {
+        background: #FFD700;
+        padding: 12px;
+        text-align: center;
+        color: black;
+        font-size: 22px;
+        font-weight: bold;
+        border-radius: 8px;
+        margin-top: 20px;
     }
+                p, h1, h2, h3, h4, h5, h6, span {
+    color: black !important;
+}
+   /* BUTTON STYLE */
 
-    /* BUTTON */
-    div.stButton > button{
-        background-color:#2563eb;
-        color:white;
-        border-radius:8px;
-        border:none;
-        padding:8px 16px;
-    }
+div.stButton > button {
+    background-color: #2563eb !important;
+    color: white !important;
+    border-radius: 8px;
+    border: none;
+    padding: 8px 18px;
+    font-weight: 600;
+}
 
-    div.stButton > button:hover{
-        background-color:#1d4ed8;
-        color:white;
-    }
+/* Hover */
 
-    /* EXPANDER */
-    .streamlit-expanderHeader{
-        background-color:#f1f5f9;
-        color:#0f172a;
-        border-radius:6px;
-    }
+div.stButton > button:hover {
+    background-color: #1d4ed8 !important;
+    color: white !important;
+}
+                
+    /* SIDEBAR LIGHT MODE */
 
-    /* SIDEBAR */
     section[data-testid="stSidebar"]{
-        background-color:#f8fafc;
+        background-color:#ffffff;
+        color:#0f172a;
+        border-right:1px solid #e5e7eb;
     }
 
-    /* LINKS */
-    a{
-        color:#2563eb;
-    }
+/* Click (Active) */
 
-    </style>
+div.stButton > button:active {
+    background-color: #2563eb !important;
+    color: white !important;
+}
+
+/* Focus */
+
+div.stButton > button:focus {
+    background-color: #2563eb !important;
+    color: white !important;
+    box-shadow: none !important;
+}             
+                /* CODE BLOCK - st.code */
+
+pre {
+    background-color: #f1f5f9 !important;   /* light background */
+    color: #0f172a !important;              /* dark text */
+    border-radius: 8px;
+    padding: 14px;
+    border: 1px solid #e2e8f0;
+    font-size: 15px;
+}
+
+/* code inside block */
+
+code {
+    color: #0f172a !important;
+}
+
+/* optional line highlight */
+
+.stCodeBlock {
+    background-color: #f8fafc !important;
+}
     """, unsafe_allow_html=True)
 
 
-    
+# ---------------- TEXT ----------------
+st.markdown('<h1 class="fade-text">Welcome to StudyNest</h1>', unsafe_allow_html=True)
 
+st.markdown('<p class="subtitle">Learn • Practice • Grow with Interactive Notes</p>', unsafe_allow_html=True)
 
-# ---------------- TITLE ----------------
-st.markdown("<h1 style='text-align:center;'>Welcome to StudyNest</h1>", unsafe_allow_html=True)
-
-st.markdown("""
-<p class="subtitle">
-Learn • Practice • Grow with Interactive Notes
-</p>
-""", unsafe_allow_html=True)
 
 # ---------------- BANNER ----------------
 st.markdown("""
@@ -163,20 +186,30 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.write("")
 
+# ---------------- CONTENT ----------------
+
+if st.session_state.theme == "dark":
+
+    st.markdown("""
+    <h2 style="color:white;">Welcome : Learn Data Visualization Step by Step</h2>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <h5 style="color:green;">
+    Transform raw data into meaningful insights through visualization.
+    </h5>
+    """, unsafe_allow_html=True)
+
+else:
+
+    st.markdown("""
+    <h2 style="color:#1e293b;">Welcome : Learn Data Visualization Step by Step</h2>
+    """, unsafe_allow_html=True)
+
+    st.markdown('<h5 style="color:green;">Transform raw data into meaningful insights through visualization.</h5>', unsafe_allow_html=True)
 # ---------------- MAIN HEADING ----------------
-st.markdown("""
-<h2 style='text-align:center;'>
-Learn Data Visualization Step by Step
-</h2>
-""", unsafe_allow_html=True)
 
-st.markdown("""
-<h5 style='text-align:center;color:green;'>
-Transform raw data into meaningful insights through visualization.
-</h5>
-""", unsafe_allow_html=True)
 
 #Use of side bar ...........................................................................
 st.sidebar.title("Go to Topics")
@@ -193,10 +226,8 @@ st.sidebar.markdown("""
 - [Loading new page](#load)
 - [About Author](#about)
 """, unsafe_allow_html=True)
-
-st.markdown("<h2 id='introduction' style='text-align:center;'>Python</h2>", unsafe_allow_html=True)
+st.markdown("<h4 id='introduction' style='text-align:center;'>Python</h4>", unsafe_allow_html=True)
 st.markdown("<h4 id='introduction' style='text-align:left;'>Introduction</h4>", unsafe_allow_html=True)
-
 st.text(
         "Python is a high-level, easy-to-learn programming language.\n"
         "It was created by Guido van Rossum in 1991.\n"
@@ -240,7 +271,7 @@ Scientific Computing""")
         
 st.subheader("Create and Run First Python Program")
 st.markdown(
-    "<h6 style='color:yellow; margin-bottom:0;'>Installation Button</h6>",
+    "<h6 style='color:#eab308; margin-bottom:0;'>Installation Button</h6>",
     unsafe_allow_html=True
 )
 st.markdown("""<style>div.stButton>button{background-color:white;color:blue}</style>""",unsafe_allow_html=True)
@@ -884,11 +915,12 @@ st.markdown("---")
 
 st.markdown("""
 <div style="
-background-color:#0e1117;
+background-color:#f1f5f9;
 padding:25px;
 border-radius:15px;
-color:white;
+color:#0f172a;
 text-align:center;
+border:1px solid #e2e8f0;
 ">
 
 <img src="https://www.python.org/static/community_logos/python-logo.png" width="120">

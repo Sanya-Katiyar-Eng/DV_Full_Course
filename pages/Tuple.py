@@ -1,60 +1,183 @@
 import streamlit as st
+import pandas as pd
+import time
+
 st.set_page_config(page_title="StudyNest", layout="wide")
+
+# ---------------- THEME INITIALIZE ----------------
+if "theme" not in st.session_state:
+    st.session_state.theme = "dark"
+
+# ---------------- THEME BUTTON ----------------
+col1, col2 = st.columns([9,1])
+
+with col2:
+    if st.button("light / dark"):
+        if st.session_state.theme == "dark":
+            st.session_state.theme = "light"
+        else:
+            st.session_state.theme = "dark"
+        st.rerun()
 
 # ---------------- BACK BUTTON ----------------
 if st.button("⬅ Back to Home"):
     st.switch_page("main.py")
 
-# ---------------- CSS STYLE ----------------
-st.markdown("""
-<style>
 
-/* 🌑 Professional Dark Background */
-.stApp {
-    background-color: #0f172a;   /* Deep Navy Professional Color */
+# ---------------- DARK MODE CSS ----------------
+if st.session_state.theme == "dark":
+
+    st.markdown("""
+    <style>
+
+    .stApp {
+        background-color: #0f172a;
+    }
+
+    .fade-text {
+        text-align: center;
+        font-size: 48px;
+        color: #FFD700;
+        animation: fadeIn 2s ease-in;
+        margin-top: 40px;
+    }
+
+    .subtitle {
+        text-align: center;
+        font-size: 22px;
+        color: #e5e7eb;
+        margin-bottom: 40px;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    .top-banner {
+        background: #FFD700;
+        padding: 12px;
+        text-align: center;
+        color: black;
+        font-size: 22px;
+        font-weight: bold;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+
+    </style>
+    """, unsafe_allow_html=True)
+
+
+# ---------------- LIGHT MODE CSS ----------------
+else:
+
+    st.markdown("""
+    <style>
+
+    .stApp {
+        background-color: white;
+        color: black;
+    }
+
+    .fade-text {
+        text-align: center;
+        font-size: 48px;
+        color: black;
+        animation: fadeIn 2s ease-in;
+        margin-top: 40px;
+    }
+
+    .subtitle {
+        text-align: center;
+        font-size: 22px;
+        color: black;
+        margin-bottom: 40px;
+    }
+
+    .top-banner {
+        background: #FFD700;
+        padding: 12px;
+        text-align: center;
+        color: black;
+        font-size: 22px;
+        font-weight: bold;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+                p, h1, h2, h3, h4, h5, h6, span {
+    color: black !important;
 }
+   /* BUTTON STYLE */
 
-/* ✨ Title */
-.fade-text {
-    text-align: center;
-    font-size: 48px;
-    color: #FFD700;
-    animation: fadeIn 2s ease-in;
-    margin-top: 40px;
-}
-
-/* Subtitle */
-.subtitle {
-    text-align: center;
-    font-size: 22px;
-    color: #e5e7eb;
-    margin-bottom: 40px;
-}
-
-/* Fade animation */
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(20px);}
-    to {opacity: 1; transform: translateY(0);}
-}
-
-/* Banner */
-.top-banner {
-    background: #FFD700;
-    padding: 12px;
-    text-align: center;
-    color: black;
-    font-size: 22px;
-    font-weight: bold;
+div.stButton > button {
+    background-color: #2563eb !important;
+    color: white !important;
     border-radius: 8px;
-    margin-top: 20px;
+    border: none;
+    padding: 8px 18px;
+    font-weight: 600;
 }
 
-</style>
-""", unsafe_allow_html=True)
+/* Hover */
+
+div.stButton > button:hover {
+    background-color: #1d4ed8 !important;
+    color: white !important;
+}
+
+/* Click (Active) */
+
+div.stButton > button:active {
+    background-color: #2563eb !important;
+    color: white !important;
+}
+
+/* Focus */
+
+div.stButton > button:focus {
+    background-color: #2563eb !important;
+    color: white !important;
+    box-shadow: none !important;
+}             
+                /* CODE BLOCK - st.code */
+
+pre {
+    background-color: #f1f5f9 !important;   /* light background */
+    color: #0f172a !important;              /* dark text */
+    border-radius: 8px;
+    padding: 14px;
+    border: 1px solid #e2e8f0;
+    font-size: 15px;
+}
+
+/* code inside block */
+
+code {
+    color: #0f172a !important;
+}
+
+/* optional line highlight */
+
+.stCodeBlock {
+    background-color: #f8fafc !important;
+}
+                
+    /* SIDEBAR LIGHT MODE */
+
+    section[data-testid="stSidebar"]{
+        background-color:#ffffff;
+        color:#0f172a;
+        border-right:1px solid #e5e7eb;
+    }
+    """, unsafe_allow_html=True)
+
 
 # ---------------- TEXT ----------------
 st.markdown('<h1 class="fade-text">Welcome to StudyNest</h1>', unsafe_allow_html=True)
+
 st.markdown('<p class="subtitle">Learn • Practice • Grow with Interactive Notes</p>', unsafe_allow_html=True)
+
 
 # ---------------- BANNER ----------------
 st.markdown("""
@@ -62,6 +185,30 @@ st.markdown("""
 ✨ 📘 Welcome to StudyNest – Your Smart Learning Hub ✨
 </div>
 """, unsafe_allow_html=True)
+
+
+# ---------------- CONTENT ----------------
+
+if st.session_state.theme == "dark":
+
+    st.markdown("""
+    <h2 style="color:white;">Welcome : Learn Data Visualization Step by Step</h2>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <h5 style="color:green;">
+    Transform raw data into meaningful insights through visualization.
+    </h5>
+    """, unsafe_allow_html=True)
+
+else:
+
+    st.markdown("""
+    <h2 style="color:#1e293b;">Welcome : Learn Data Visualization Step by Step</h2>
+    """, unsafe_allow_html=True)
+
+    st.markdown('<h5 style="color:green;">Transform raw data into meaningful insights through visualization.</h5>', unsafe_allow_html=True)
+# ---------------- MAIN HEADING ----------------
 st.markdown("""
 1. [Practice](#p)""")
 st.markdown('<h2 style="color:yellow;text-align:center;">Python Tuples</h2>', unsafe_allow_html=True)

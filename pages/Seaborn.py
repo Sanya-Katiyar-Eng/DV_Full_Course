@@ -1,62 +1,185 @@
 import streamlit as st
+import pandas as pd
+import time
 import seaborn as sns
+import numpy as np
 import matplotlib.pyplot as plt
 st.set_page_config(page_title="StudyNest", layout="wide")
+
+# ---------------- THEME INITIALIZE ----------------
+if "theme" not in st.session_state:
+    st.session_state.theme = "dark"
+
+# ---------------- THEME BUTTON ----------------
+col1, col2 = st.columns([9,1])
+
+with col2:
+    if st.button("light / dark"):
+        if st.session_state.theme == "dark":
+            st.session_state.theme = "light"
+        else:
+            st.session_state.theme = "dark"
+        st.rerun()
 
 # ---------------- BACK BUTTON ----------------
 if st.button("⬅ Back to Home"):
     st.switch_page("main.py")
 
-# ---------------- CSS STYLE ----------------
-st.markdown("""
-<style>
 
-/* 🌑 Professional Dark Background */
-.stApp {
-    background-color: #0f172a;   /* Deep Navy Professional Color */
+# ---------------- DARK MODE CSS ----------------
+if st.session_state.theme == "dark":
+
+    st.markdown("""
+    <style>
+
+    .stApp {
+        background-color: #0f172a;
+    }
+
+    .fade-text {
+        text-align: center;
+        font-size: 48px;
+        color: #FFD700;
+        animation: fadeIn 2s ease-in;
+        margin-top: 40px;
+    }
+
+    .subtitle {
+        text-align: center;
+        font-size: 22px;
+        color: #e5e7eb;
+        margin-bottom: 40px;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    .top-banner {
+        background: #FFD700;
+        padding: 12px;
+        text-align: center;
+        color: black;
+        font-size: 22px;
+        font-weight: bold;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+
+    </style>
+    """, unsafe_allow_html=True)
+
+
+# ---------------- LIGHT MODE CSS ----------------
+else:
+
+    st.markdown("""
+    <style>
+
+    .stApp {
+        background-color: white;
+        color: black;
+    }
+
+    .fade-text {
+        text-align: center;
+        font-size: 48px;
+        color: black;
+        animation: fadeIn 2s ease-in;
+        margin-top: 40px;
+    }
+
+    .subtitle {
+        text-align: center;
+        font-size: 22px;
+        color: black;
+        margin-bottom: 40px;
+    }
+
+    .top-banner {
+        background: #FFD700;
+        padding: 12px;
+        text-align: center;
+        color: black;
+        font-size: 22px;
+        font-weight: bold;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+                p, h1, h2, h3, h4, h5, h6, span {
+    color: black !important;
 }
+   /* BUTTON STYLE */
 
-/* ✨ Title */
-.fade-text {
-    text-align: center;
-    font-size: 48px;
-    color: #FFD700;
-    animation: fadeIn 2s ease-in;
-    margin-top: 40px;
-}
-
-/* Subtitle */
-.subtitle {
-    text-align: center;
-    font-size: 22px;
-    color: #e5e7eb;
-    margin-bottom: 40px;
-}
-
-/* Fade animation */
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(20px);}
-    to {opacity: 1; transform: translateY(0);}
-}
-
-/* Banner */
-.top-banner {
-    background: #FFD700;
-    padding: 12px;
-    text-align: center;
-    color: black;
-    font-size: 22px;
-    font-weight: bold;
+div.stButton > button {
+    background-color: #2563eb !important;
+    color: white !important;
     border-radius: 8px;
-    margin-top: 20px;
+    border: none;
+    padding: 8px 18px;
+    font-weight: 600;
 }
 
-</style>
-""", unsafe_allow_html=True)
+/* Hover */
+
+div.stButton > button:hover {
+    background-color: #1d4ed8 !important;
+    color: white !important;
+}
+                
+    /* SIDEBAR LIGHT MODE */
+
+    section[data-testid="stSidebar"]{
+        background-color:#ffffff;
+        color:#0f172a;
+        border-right:1px solid #e5e7eb;
+    }
+
+/* Click (Active) */
+
+div.stButton > button:active {
+    background-color: #2563eb !important;
+    color: white !important;
+}
+
+/* Focus */
+
+div.stButton > button:focus {
+    background-color: #2563eb !important;
+    color: white !important;
+    box-shadow: none !important;
+}             
+                /* CODE BLOCK - st.code */
+
+pre {
+    background-color: #f1f5f9 !important;   /* light background */
+    color: #0f172a !important;              /* dark text */
+    border-radius: 8px;
+    padding: 14px;
+    border: 1px solid #e2e8f0;
+    font-size: 15px;
+}
+
+/* code inside block */
+
+code {
+    color: #0f172a !important;
+}
+
+/* optional line highlight */
+
+.stCodeBlock {
+    background-color: #f8fafc !important;
+}
+    """, unsafe_allow_html=True)
+
 
 # ---------------- TEXT ----------------
 st.markdown('<h1 class="fade-text">Welcome to StudyNest</h1>', unsafe_allow_html=True)
+
 st.markdown('<p class="subtitle">Learn • Practice • Grow with Interactive Notes</p>', unsafe_allow_html=True)
+
 
 # ---------------- BANNER ----------------
 st.markdown("""
@@ -65,6 +188,29 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+
+# ---------------- CONTENT ----------------
+
+if st.session_state.theme == "dark":
+
+    st.markdown("""
+    <h2 style="color:white;">Welcome : Learn Data Visualization Step by Step</h2>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <h5 style="color:green;">
+    Transform raw data into meaningful insights through visualization.
+    </h5>
+    """, unsafe_allow_html=True)
+
+else:
+
+    st.markdown("""
+    <h2 style="color:#1e293b;">Welcome : Learn Data Visualization Step by Step</h2>
+    """, unsafe_allow_html=True)
+
+    st.markdown('<h5 style="color:green;">Transform raw data into meaningful insights through visualization.</h5>', unsafe_allow_html=True)
+# ---------------- MAIN HEADING ----------------
 #sidebar.........
 
 # ---------------- PAGE CONFIG ----------------
@@ -80,10 +226,10 @@ st.markdown("<h1 style='text-align:center;color:cyan;'> Seaborn </h1>", unsafe_a
 
 # ---------------- SIDEBAR ----------------
 st.sidebar.markdown("""
-## 📋 Topics Menu
+## Topics Menu
 - [Introduction](#intro)
 - [Table of Contents](#toc)
-## 📊 Categorical Plots
+##  Categorical Plots
 - [Count Plot](#countplot)
 - [Bar Plot](#barplot)
 - [ Box Plot](#boxplot)
@@ -92,7 +238,7 @@ st.sidebar.markdown("""
 - [strip Plot](#stripplot)
 - [swarm Plot](#swarmplot)
 - [point Plot](#pointplot)
-### 📈 Distribution Plots (Univariate / Bivariate)
+###  Distribution Plots (Univariate / Bivariate)
 - [Histogram](#histogram)
 - [KDE Plot](#kdeplot)
 - [dist Plot](#distplot)
@@ -104,22 +250,22 @@ st.sidebar.markdown("""
 - [lm plot](#lmplot)
 
 
-### 🔹 Relational Plots (Relationship between variables)
+###  Relational Plots (Relationship between variables)
 - [Scatter Plot](#scatter)
 - [line Plot](#lineplot)
 
-### 🌐 Multivariate / Joint Plots
+###  Multivariate / Joint Plots
 - [Pair Plot](#pairplot)
 - [joint plot](#jointplot)
 
-### 🔥 Matrix Plots
+###  Matrix Plots
 - [Heatmap](#heatmap)
 - [clustermap](#cluster)
 ### Time Series / Statistical Estimation
 - [line plot](#lineplot)
 - [point Plot](#pointplot)   
 
-### 🎨 Styling & Themes
+### Styling & Themes
 - [Styling & Themes](#style)
 
 
@@ -160,9 +306,9 @@ st.code("""import seaborn as sns
 st.dataframe(tips.head())
 
 # ---------------- TABLE OF CONTENTS ----------------
-st.markdown("<h2 id='toc'>📑 Table of Contents</h2>", unsafe_allow_html=True)
+st.markdown("<h2 id='toc'> Table of Contents</h2>", unsafe_allow_html=True)
 st.markdown("""
-### 📊 Categorical Plots
+###  Categorical Plots
 - [Count Plot](#countplot)
 - [Bar Plot](#barplot)
 - [ Box Plot](#boxplot)
@@ -171,7 +317,7 @@ st.markdown("""
 - [strip Plot](#stripplot)
 - [swarm Plot](#swarmplot)
 - [point Plot](#pointplot)
-### 📈 Distribution Plots (Univariate / Bivariate)
+###  Distribution Plots (Univariate / Bivariate)
 - [Histogram](#histogram)
 - [KDE Plot](#kdeplot)
 - [dist Plot](#distplot)
@@ -183,35 +329,35 @@ st.markdown("""
 - [lm plot](#lmplot)
 
 
-### 🔹 Relational Plots (Relationship between variables)
+###  Relational Plots (Relationship between variables)
 - [Scatter Plot](#scatter)
 - [line Plot](#lineplot)
 
-### 🌐 Multivariate / Joint Plots
+###  Multivariate / Joint Plots
 - [Pair Plot](#pairplot)
 - [joint plot](#jointplot)
 
-### 🔥 Matrix Plots
+###  Matrix Plots
 - [Heatmap](#heatmap)
 - [clustermap](#cluster)
 ### Time Series / Statistical Estimation
 - [line plot](#lineplot)
 - [point Plot](#pointplot)   
 
-### 🎨 Styling & Themes
+###  Styling & Themes
 - [Styling & Themes](#style)
 
 """, unsafe_allow_html=True)
 #===================Categorical Plot=================
 
 
-st.markdown("<h4 style='text-align:center; color:cyan;'>📊 COUNT PLOT IN SEABORN</h4>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align:center; color:cyan;'> COUNT PLOT IN SEABORN</h4>", unsafe_allow_html=True)
 
 st.text("Used when one variable is categorical.")
 # ---------------- COUNT PLOT ----------------
 st.markdown("<a id='countplot'></a>", unsafe_allow_html=True)
 
-st.markdown("<h2 id='countplot'>📊 Count Plot</h2>", unsafe_allow_html=True)
+st.markdown("<h2 id='countplot'> Count Plot</h2>", unsafe_allow_html=True)
 
 # Page Config
 st.set_page_config(page_title="Count Plot - Seaborn", layout="wide")
@@ -305,9 +451,9 @@ if st.button("Run",key="3"):
 # ---------------- WHEN IT DOES NOT WORK ----------------
 st.markdown("<h3 style='color:pink;'> When Count Plot Does NOT Work</h3>", unsafe_allow_html=True)
 st.markdown("""
-❌ Continuous numerical data (like salary, age)  
-❌ Too many categories (100+ unique values)  
-❌ Time series data directly  
+ Continuous numerical data (like salary, age)  
+ Too many categories (100+ unique values)  
+ Time series data directly  
 """)
 
 # ---------------- KEYWORDS ----------------
@@ -1136,7 +1282,7 @@ st.markdown("""
 """)
 
 # ---------------- STYLISH EXAMPLE ----------------
-st.markdown("<h3 style='color:lightgreen;'>✨ Stylish Swarm Plot Example</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='color:lightgreen;'> Stylish Swarm Plot Example</h3>", unsafe_allow_html=True)
 
 st.code("""import seaborn as sns
 import matplotlib.pyplot as plt
@@ -1181,7 +1327,7 @@ st.markdown("""
 """)
 #---------------point plot-----------------
 st.markdown("<a id='pointplot'></a>", unsafe_allow_html=True)
-st.markdown("<h2 id='pointplot'>📊 Point Plot</h2>", unsafe_allow_html=True)
+st.markdown("<h2 id='pointplot'> Point Plot</h2>", unsafe_allow_html=True)
 st.set_page_config(page_title="Point Plot - Seaborn", layout="wide")
 
 # Title
@@ -1301,7 +1447,7 @@ st.markdown("""
 """)
 
 # ---------------- STYLISH EXAMPLE ----------------
-st.markdown("<h3 style='color:lightgreen;'>✨ Stylish Point Plot Example</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='color:lightgreen;'> Stylish Point Plot Example</h3>", unsafe_allow_html=True)
 
 st.code("""import seaborn as sns
 import matplotlib.pyplot as plt
@@ -1382,7 +1528,7 @@ Distplot (old)
 Histogram + KDE together (now deprecated)  """)
 st.markdown("<a id='histogram'></a>", unsafe_allow_html=True)
 # ---------------- HISTOGRAM ----------------
-st.markdown("<h2 id='histogram'>📈 Histogram</h2>", unsafe_allow_html=True)
+st.markdown("<h2 id='histogram'> Histogram</h2>", unsafe_allow_html=True)
 st.set_page_config(page_title="Histogram - Seaborn", layout="wide")
 
 # Title
@@ -1500,7 +1646,7 @@ st.markdown("""
 """)
 
 # ---------------- STYLISH EXAMPLE ----------------
-st.markdown("<h3 style='color:lightgreen;'>✨ Stylish Histogram Example</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='color:lightgreen;'> Stylish Histogram Example</h3>", unsafe_allow_html=True)
 
 st.code("""import seaborn as sns
 import matplotlib.pyplot as plt
@@ -1546,8 +1692,8 @@ st.markdown("""
 """)
 st.markdown("<a id='kdeplot'></a>", unsafe_allow_html=True)
 # ---------------- KDE ----------------
-st.markdown("<h2 id='kdeplot'>📈 KDE Plot</h2>", unsafe_allow_html=True)
-st.markdown("<h2 id='kdeplot'>📈 KDE Plot</h2>", unsafe_allow_html=True)
+st.markdown("<h2 id='kdeplot'> KDE Plot</h2>", unsafe_allow_html=True)
+st.markdown("<h2 id='kdeplot'> KDE Plot</h2>", unsafe_allow_html=True)
 st.set_page_config(page_title="KDE Plot - Seaborn", layout="wide")
 
 # Title
@@ -1663,7 +1809,7 @@ st.markdown("""
 """)
 
 # ---------------- STYLISH EXAMPLE ----------------
-st.markdown("<h3 style='color:lightgreen;'>✨ Stylish KDE Plot Example</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='color:lightgreen;'> Stylish KDE Plot Example</h3>", unsafe_allow_html=True)
 
 st.code("""import seaborn as sns
 import matplotlib.pyplot as plt
@@ -1708,7 +1854,7 @@ st.markdown("""
 """)
 st.markdown("<a id='distplot'></a>", unsafe_allow_html=True)
 #=================dist===========================
-st.markdown("<h2 id='distplot'>📈 Dist Plot</h2>", unsafe_allow_html=True)
+st.markdown("<h2 id='distplot'> Dist Plot</h2>", unsafe_allow_html=True)
 
 st.set_page_config(page_title="Dist Plot - Seaborn", layout="wide")
 
@@ -1734,7 +1880,7 @@ It helps us understand:
 # ---------------- IMPORTANT NOTE ----------------
 st.markdown("<h2 style='color:orange;'> Important Note (Very Valuable)</h2>", unsafe_allow_html=True)
 st.markdown("""
-⚠️ **distplot() is deprecated in new Seaborn versions**  
+ **distplot() is deprecated in new Seaborn versions**  
 Instead of `sns.distplot()` use:
 - `sns.histplot()`  
 - `sns.kdeplot()`  
@@ -1844,7 +1990,7 @@ st.markdown("""
 """)
 
 # ---------------- STYLISH EXAMPLE ----------------
-st.markdown("<h3 style='color:lightgreen;'>✨ Stylish Dist Plot Example</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='color:lightgreen;'> Stylish Dist Plot Example</h3>", unsafe_allow_html=True)
 
 st.code("""import seaborn as sns
 import matplotlib.pyplot as plt
@@ -1911,7 +2057,7 @@ st.markdown("""
 """)
 #=================rug=========
 st.markdown("<a id='rugplot'></a>", unsafe_allow_html=True)
-st.markdown("<h2 id='rugplot'>📈 Rug Plot</h2>", unsafe_allow_html=True)
+st.markdown("<h2 id='rugplot'> Rug Plot</h2>", unsafe_allow_html=True)
 
 
 st.set_page_config(page_title="Rug Plot - Seaborn", layout="wide")
@@ -2026,7 +2172,7 @@ st.markdown("""
 """)
 
 # ---------------- STYLISH EXAMPLE ----------------
-st.markdown("<h3 style='color:lightgreen;'>✨ Stylish Rug Plot Example</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='color:lightgreen;'> Stylish Rug Plot Example</h3>", unsafe_allow_html=True)
 
 st.code("""import seaborn as sns
 import matplotlib.pyplot as plt
@@ -2068,7 +2214,7 @@ st.markdown("""
 """)
 st.markdown("<a id='ecd'></a>", unsafe_allow_html=True)
 #=======================ecdf============
-st.markdown("<h2 id='ecd'>📈 ECDF Plot</h2>", unsafe_allow_html=True)
+st.markdown("<h2 id='ecd'> ECDF Plot</h2>", unsafe_allow_html=True)
 
 st.set_page_config(page_title="ECDF Plot - Seaborn", layout="wide")
 
@@ -2197,7 +2343,7 @@ st.markdown("""
 """)
 
 # ---------------- STYLISH EXAMPLE ----------------
-st.markdown("<h3 style='color:lightgreen;'>✨ Stylish ECDF Plot Example</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='color:lightgreen;'> Stylish ECDF Plot Example</h3>", unsafe_allow_html=True)
 
 st.code("""import seaborn as sns
 import matplotlib.pyplot as plt
@@ -2266,10 +2412,10 @@ st.markdown("""
 
 #===================reg plot
 st.markdown("<a id='reg'></a>", unsafe_allow_html=True)
-st.title("📈 Regression & Trend")
+st.title(" Regression & Trend")
 
 # ---------------- Definition ----------------
-st.subheader("📌 Definition")
+st.subheader(" Definition")
 st.markdown("""
 **Trend:**  
 Trend shows the overall direction of data (increase, decrease, or constant).
@@ -2279,7 +2425,7 @@ Regression is a statistical method that shows the relationship between two varia
 """)
 
 # ---------------- Key Points ----------------
-st.subheader("📝 Key Points")
+st.subheader(" Key Points")
 st.markdown("""
 - Trend shows the pattern of data over time.
 - Regression explains the relationship between variables.
@@ -2410,7 +2556,7 @@ st.markdown("""
 """)
 
 # ---------------- STYLISH EXAMPLE ----------------
-st.markdown("<h3 style='color:lightgreen;'>✨ Stylish Regression Plot Example</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='color:lightgreen;'> Stylish Regression Plot Example</h3>", unsafe_allow_html=True)
 
 st.code("""import seaborn as sns
 import matplotlib.pyplot as plt
@@ -2559,7 +2705,7 @@ st.markdown("""
 """)
 
 # ---------------- STYLISH EXAMPLE ----------------
-st.markdown("<h3 style='color:lightgreen;'>✨ Stylish LM Plot Example</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='color:lightgreen;'> Stylish LM Plot Example</h3>", unsafe_allow_html=True)
 
 st.code("""sns.lmplot(x="total_bill", y="tip", hue="sex",
            data=df,
@@ -2585,7 +2731,7 @@ if st.button("Run", key="54"):
 # ---------------- EXTRA VALUABLE CONCEPT ----------------
 st.markdown("<h2 style='color:orange;'> Extra Valuable Concept</h2>", unsafe_allow_html=True)
 st.markdown("""
-📌 LM Plot is useful for:
+ LM Plot is useful for:
 - Trend analysis  
 - Prediction  
 - Correlation study  
