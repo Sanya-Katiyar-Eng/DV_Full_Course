@@ -865,7 +865,6 @@ we can create clear, attractive and informative line plots that help in identify
 
 #line plot
 st.markdown("<a id='line'></a>", unsafe_allow_html=True)
-import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 import random
@@ -1986,8 +1985,6 @@ if st.button("Show Output - 2D Histogram"):
 
 #pie................
 st.markdown("<a id='pie'></a>",unsafe_allow_html=True)
-import streamlit as st
-import numpy as np
 import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Pie Chart in Matplotlib", layout="wide")
@@ -2230,7 +2227,6 @@ They are useful for presentations, reports, and dashboards.
 
 
 st.markdown("<a id='3'></a>",unsafe_allow_html=True)
-import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.tri import Triangulation
