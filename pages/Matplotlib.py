@@ -1764,7 +1764,7 @@ st.divider()
 
 # ================= EXAMPLE 2 =================
 st.markdown('<div class="sub">2. Customized Histogram with Density Plot</div>', unsafe_allow_html=True)
-
+import seaborn as sns
 st.code("""
 sns.histplot(data, bins=30, kde=True, color='lightgreen', edgecolor='red')
 """)

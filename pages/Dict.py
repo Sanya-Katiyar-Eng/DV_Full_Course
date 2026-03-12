@@ -234,7 +234,6 @@ st.sidebar.markdown("""
 <a href="#nested">7. Nested Dictionary</a><br>
 <a href="#methods">8. All Methods</a><br>
 <a href="#practice">9. Practice</a><br>
-<a href="#youtube">10. Youtube Tutorial</a>
 """, unsafe_allow_html=True)
 
 
@@ -387,8 +386,3 @@ st.title("Practice Questions")
 st.markdown("[Click for Practice](https://www.w3resource.com/python-exercises/dictionary/)")
 
 
-# ---------------- YOUTUBE ----------------
-st.markdown('<a id="youtube"></a>', unsafe_allow_html=True)
-st.title("Youtube Tutorial")
-
-st.markdown("[Watch Tutorial](https://www.youtube.com/watch?v=brnsFCa7npc)")
