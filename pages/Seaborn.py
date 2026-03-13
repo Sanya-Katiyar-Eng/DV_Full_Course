@@ -270,7 +270,6 @@ st.sidebar.markdown("""
 
 
 - [Practice](#practice)
-- [About](#about)
 """, unsafe_allow_html=True)
 
 # ---------------- INTRO ----------------
@@ -3967,49 +3966,4 @@ st.markdown("""
 st.markdown("<a id='practice'></a>", unsafe_allow_html=True)
 st.markdown('<h2 style="color:cyan;">Practice Ouestion</h2>', unsafe_allow_html=True)
 st.markdown("[Kaggle plateform](https://www.kaggle.com/work/code)")
-
-
-st.markdown("<a id='about'></a>", unsafe_allow_html=True)
-st.markdown("<a id='about'></a>",unsafe_allow_html=True)
-st.markdown("---")
-
-st.markdown("""
-<div style="
-background-color:#0e1117;
-padding:25px;
-border-radius:15px;
-color:white;
-text-align:center;
-">
-
-<img src="https://www.python.org/static/community_logos/python-logo.png" width="120">
-
-<h2>👩‍💻 Author: Sanya Katiyar</h2>
-
-<p>Python & Data Science Learner 🚀 <br>
-This application is built using <b>Streamlit</b>.</p>
-
-<h4>🎓 Guided by: Dr Aditya Khamparia Sir</h4>
-<p>(Project idea given by my respected teacher)</p>
-
-<hr style="border:1px solid gray;">
-
-<h3>📞 Contact Me</h3>
-
-<p>
-<a href="https://www.linkedin.com/feed/">🔗 LinkedIn</a> | 
-<a href="https://github.com/Sanya-Katiyar-Eng" target="_blank">💻 GitHub</a> | 
-<a href="https://www.youtube.com/" target="_blank">▶️ YouTube</a>
-</p>
-
-<p>📱 Phone: +91-7905639342</p>
-<p>📧 Email:sanyakatiyar01@gmail.com</p>
-
-<hr style="border:1px solid gray;">
-
-<p style="color:lightgray;">© 2026 Sanya Katiyar | All Rights Reserved</p>
-
-</div>
-""", unsafe_allow_html=True)
-
 

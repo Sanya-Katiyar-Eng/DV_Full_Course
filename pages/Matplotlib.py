@@ -269,7 +269,6 @@ st.sidebar.markdown("""
 - [3D Charts with Matplotlib](#3)
 - [Dashboard](#dashboard)
 - [Practice](#pr)
-- [About author](#a)
 """, unsafe_allow_html=True)
 #intro................
 st.markdown("<a id='intro'></a>", unsafe_allow_html=True)
@@ -2625,49 +2624,4 @@ st.markdown("[Click here for Practice  Basic Questions ](https://www.w3resource.
 st.markdown("[Click here for Practice  Bar Questions 📘](https://www.w3resource.com/graphics/matplotlib/barchart/index.php)")
 st.markdown("[Click here for Practice  Pie Questions 📘](https://www.w3resource.com/graphics/matplotlib/piechart/index.php)")
 st.markdown("[Click here for Practice  Scatter Questions 📘](https://www.w3resource.com/graphics/matplotlib/scatter/index.php))")
-
-st.markdown("<a id='a'></a>",unsafe_allow_html=True)
-st.markdown("<a id='about'></a>",unsafe_allow_html=True)
-st.markdown("---")
-
-st.markdown("""
-<div style="
-background-color:#0e1117;
-padding:25px;
-border-radius:15px;
-color:white;
-text-align:center;
-">
-
-<img src="https://www.python.org/static/community_logos/python-logo.png" width="120">
-
-<h2>👩‍💻 Author: Sanya Katiyar</h2>
-
-<p>Python & Data Science Learner 🚀 <br>
-This application is built using <b>Streamlit</b>.</p>
-
-<h4>🎓 Guided by: Dr Aditya Khamparia Sir</h4>
-<p>(Project idea given by my respected teacher)</p>
-
-<hr style="border:1px solid gray;">
-
-<h3>📞 Contact Me</h3>
-
-<p>
-<a href="https://www.linkedin.com/feed/">🔗 LinkedIn</a> | 
-<a href="https://github.com/Sanya-Katiyar-Eng" target="_blank">💻 GitHub</a> | 
-<a href="https://www.youtube.com/" target="_blank">▶️ YouTube</a>
-</p>
-
-<p>📱 Phone: +91-7905639342</p>
-<p>📧 Email:sanyakatiyar01@gmail.com</p>
-
-<hr style="border:1px solid gray;">
-
-<p style="color:lightgray;">© 2026 Sanya Katiyar | All Rights Reserved</p>
-
-</div>
-""", unsafe_allow_html=True)
-
-
 
